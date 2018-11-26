@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form class="form-horizontal" onsubmit="return false" id="form">
+		<fieldset>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>uniacid</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='uniacid' type='text' name='uniacid' id='uniacid' data-bv-notempty='true' data-bv-notempty-message='uniacid 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>parentId</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='parentId' type='text' name='parentId' id='parentId' data-bv-notempty='true' data-bv-notempty-message='parentId 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>initials</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='initials' type='text' name='initials' id='initials' data-bv-notempty='true' data-bv-notempty-message='initials 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>name</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='name' type='text' name='name' id='name' data-bv-notempty='true' data-bv-notempty-message='name 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>picUrl</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='picUrl' type='text' name='picUrl' id='picUrl' data-bv-notempty='true' data-bv-notempty-message='picUrl 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>status</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='status' type='text' name='status' id='status' data-bv-notempty='true' data-bv-notempty-message='status 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>sort</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='sort' type='text' name='sort' id='sort' data-bv-notempty='true' data-bv-notempty-message='sort 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>isHot</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='isHot' type='text' name='isHot' id='isHot' data-bv-notempty='true' data-bv-notempty-message='isHot 不能为空'>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+					    <button class="btn btn-primary" onclick="location.href='imsAutopartsCarBrandList'">返回</button>
+						<button class="btn btn-primary" type="submit" onclick="add()">
+							<i class="fa fa-save"></i> 保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+	<script type="text/javascript" th:src="@{/static/js/libs/jquery-2.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/plugin/bootstrapvalidator/bootstrapValidator.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+	<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/jq.js}"></script>
+	<script type="text/javascript">
+		var layer;
+		layui.use(['layer','laydate'], function(){
+		    layer = layui.layer;
+		});
+		
+		function add() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+		    if(!bootstrapValidator.isValid()){
+			   return;
+		    }
+		    
+		    var formdata = $("#form").serializeObject();
+
+			$.ajax({
+				type : 'post',
+				url : '/imsAutopartsCarBrands',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("添加成功", {shift: -1, time: 1000}, function(){
+                        location.href = "imsAutopartsCarBrandList";
+                    });
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

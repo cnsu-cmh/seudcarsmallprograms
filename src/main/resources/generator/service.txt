@@ -1,0 +1,22 @@
+package {servicePkgName};
+
+import java.util.List;
+import java.util.Map;
+
+import {beanPackageName}.{beanName};
+
+public interface {serviceName} {
+
+    {beanName} save{beanName}({beanName} {beanParamName});
+
+    {beanName} getById(Long id);
+
+    {beanName} update{beanName}({beanName} {beanParamName});
+
+    Integer selectConditionCount(Map<String,Object> params);
+
+    List<{beanName}> selectConditionList(Map<String,Object> params);
+
+    void delete(Long id);
+
+}

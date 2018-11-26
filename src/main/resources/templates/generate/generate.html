@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label">表名</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="表名" type="text" name="tableName" id="tableName" value=""
+                        data-bv-notempty="true"
+                        data-bv-notempty-message="表名 不能为空">
+                    <button id="showInfo" class="btn btn-primary">预览代码</button>
+                    <button id="save" class="btn btn-primary">生成代码</button>
+                </div>
+            </div>
+        </fieldset>
+        <div id="detail">
+	        <fieldset>
+	           <table class="table">
+                  <caption>基本配置</caption>
+                  <tbody>
+                    <tr>
+                        <td width="20%">路径</td>
+                        <td colspan="3">
+                          <input class="form-control" placeholder="路径" type="text" name="path" id="path" value="D:/generate"
+                                 data-bv-notempty="true"
+                                 data-bv-notempty-message="路径 不能为空">
+                        </td>
+
+                    </tr>
+                    <tr>
+                      <td>bean包名</td>
+                      <td>
+                        <input class="form-control" placeholder="bean包名" type="text" readonly
+                               name="beanPackageName" id="beanPackageName" value="com.xiaoshu.seudcarsmallprograms.model"
+                               data-bv-notempty="true"
+                               data-bv-notempty-message="bean包名 不能为空">
+                      </td>
+                      <td>bean类名</td>
+                      <td>
+                        <input class="form-control" placeholder="bean类名" type="text" readonly
+                               name="beanName" id="beanName" value="BeanTest"
+                               data-bv-notempty="true"
+                               data-bv-notempty-message="bean类名 不能为空">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>mapper包名</td>
+                      <td>
+                        <input class="form-control" placeholder="mapper包名" type="text" readonly
+                               name="mapperPackageName" id="mapperPackageName" value="com.xiaoshu.seudcarsmallprograms.mapper"
+                               data-bv-notempty="true"
+                               data-bv-notempty-message="mapper包名 不能为空">
+                      </td>
+                      <td>mapper类名</td>
+                      <td>
+                        <input class="form-control" placeholder="mapper类名" type="text" readonly
+                               name="mapperName" id="mapperName" value="BeanTestMapper"
+                               data-bv-notempty="true"
+                               data-bv-notempty-message="mapper类名 不能为空">
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>service包名</td>
+                        <td>
+                            <input class="form-control" placeholder="service包名" type="text" readonly
+                                   name="servicePkgName" id="servicePkgName" value="com.xiaoshu.seudcarsmallprograms.service"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="service包名 不能为空">
+                        </td>
+                        <td>service类名</td>
+                        <td>
+                            <input class="form-control" placeholder="service类名" type="text" readonly
+                                   name="serviceName" id="serviceName" value="ServiceTest"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="service类名 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>serviceImpl包名</td>
+                        <td>
+                            <input class="form-control" placeholder="serviceImpl包名" type="text" readonly
+                                   name="serviceImplPkgName" id="serviceImplPkgName" value="com.xiaoshu.seudcarsmallprograms.service.impl"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="serviceImpl包名 不能为空">
+                        </td>
+                        <td>service类名</td>
+                        <td>
+                            <input class="form-control" placeholder="serviceImpl类名" type="text" readonly
+                                   name="serviceImplName" id="serviceImplName" value="ServiceImplTest"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="serviceImpl类名 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>controller包名</td>
+                        <td>
+                            <input class="form-control" placeholder="controller包名" type="text" readonly
+                                   name="controllerPkgName" id="controllerPkgName" value="com.xiaoshu.seudcarsmallprograms.controller"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="controller包名 不能为空">
+                        </td>
+                        <td>controller类名</td>
+                        <td>
+                         <input class="form-control" placeholder="controller类名" type="text" readonly
+                                name="controllerName" id="controllerName" value="ControllerTest"
+                                data-bv-notempty="true"
+                                data-bv-notempty-message="controller类名 不能为空">
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+	        </fieldset>
+            <table class="table">
+                <caption>字段详情</caption>
+                <thead>
+                    <tr>
+                        <th>表字段名</th>
+                        <th>表类型</th>
+                        <th>字段描述</th>
+                        <th>java字段名</th>
+                        <th>java字段类型</th>
+                        <th>默认值</th>
+                    </tr>
+                </thead>
+                <tbody id="beanFields">
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+    <script type="text/javascript" th:src="@{/static/js/libs/jquery-2.1.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/plugin/bootstrapvalidator/bootstrapValidator.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+
+<script>
+
+    var layer;
+    layui.use('layer', function(){
+        layer = layui.layer;
+    });
+
+    $('#form').bootstrapValidator();
+    $("#detail").hide();
+    $("#save").hide();
+
+    $("#showInfo").click(function(){
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(!bootstrapValidator.isValid()){
+            return;
+        }
+        var beanFields = $("#beanFields");
+        beanFields.html("");
+        $.ajax({
+            type : 'get',
+            url : '/generate',
+            data : "tableName=" + $("#tableName").val(),
+            success : function(data) {
+                $("#detail").show();
+                $("#save").show();
+
+                $("#path").val(data.path);
+
+                var beanName = data.beanName;
+                $("#beanName").val(beanName);
+                $("#mapperName").val(beanName + "Mapper");
+                $("#serviceName").val(beanName + "Service");
+                $("#serviceImplName").val(beanName + "ServiceImpl");
+                $("#controllerName").val(beanName + "Controller");
+                var fields = data.fields;
+                var length = fields.length;
+
+                for(var i=0;i<length;i++){
+                    var f = fields[i];
+                    var tr = $("<tr></tr>");
+
+                    var columnName = f['columnName'];
+                    var columnNameInput = "<input type='hidden' name='columnNames' value='" + columnName +"'>"
+
+                    tr.append("<td>" + columnNameInput + columnName + "</td>");
+                    tr.append("<td>" + f['columnType'] + "</td>");
+                    tr.append("<td>" + f['columnComment'] + "</td>");
+
+                    //tr.append("<td>" + f['name'] + "</td>");
+
+                    var name = f['name'];
+                    var nameInput = "<input name='beanFieldName' class='form-control' readonly value='" + name +"'>";
+                    tr.append("<td>" + nameInput + "</td>");
+
+                    tr.append("<td>" + f['type'] + "</td>");
+                    tr.append("<td>" + f['columnDefault'] + "</td>");
+
+                    //
+                    // var type = f['type'];
+                    // var typeInput = "<input name='beanFieldType' class='form-control' value='" + type +"'>"
+                    // tr.append("<td>" + typeInput + "</td>");
+                    //
+                    // var val = f['columnDefault'];
+                    // var valInput = "<input name='beanFieldValue' class='form-control' value='" + val +"'>"
+                    // tr.append("<td>" + valInput + "</td>");
+                    beanFields.append(tr);
+                }
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                $("#tableName").val("");
+                var msg = xhr.responseText;
+                var response = JSON.parse(msg);
+                var message = response.message;
+                layer.msg(message);
+            }
+        });
+    });
+
+    $("#save").click(function(){
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(!bootstrapValidator.isValid()){
+            return;
+        }
+        if($("#detail").is(':hidden')) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+
+        $.ajax({
+            type : 'post',
+            url : '/generate',
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(formdata),
+            success : function(data) {
+                $("#detail").hide();
+                $("#save").hide();
+                layer.msg("生成成功");
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                $("#tableName").val("");
+                var msg = xhr.responseText;
+                var response = JSON.parse(msg);
+                var message = response.message;
+                layer.msg(message);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
