@@ -9,8 +9,6 @@ import com.xiaoshu.seudcarsmallprograms.page.table.PageTableRequest;
 import com.xiaoshu.seudcarsmallprograms.page.table.PageTableResponse;
 import com.xiaoshu.seudcarsmallprograms.service.SysUserService;
 import com.xiaoshu.seudcarsmallprograms.util.UserUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +25,15 @@ public class SysUserController {
     @Autowired
     private SysUserService userService;
 
-    @LogAnnotation(module = "currentUser")
+    /**
+     * 当前登录用户
+     * @return
+     */
     @GetMapping("/current")
     public SysUser currentUser() {
         return UserUtil.getCurrentUser();
     }
 
-    @LogAnnotation(module = "listUsers")
     @GetMapping
     @RequiresPermissions("sys:user:query")
     public PageTableResponse listUsers(PageTableRequest request) {
@@ -46,8 +46,8 @@ public class SysUserController {
         return new PageTableHandler(countHandler,listHandler).handle(request);
     }
 
-    @LogAnnotation(module = "saveUser")
     @PostMapping
+    @LogAnnotation(module = "保存用户")
     @RequiresPermissions("sys:user:add")
     public SysUser saveUser(@RequestBody UserDto userDto) {
         SysUser user = userService.getUser(userDto.getUsername());
@@ -58,28 +58,27 @@ public class SysUserController {
         return userService.saveUser(userDto);
     }
 
-    @LogAnnotation(module = "updateUser")
     @PutMapping
+    @LogAnnotation(module = "修改用户")
     @RequiresPermissions("sys:user:add")
     public SysUser updateUser(@RequestBody UserDto userDto) {
         return userService.updateUser(userDto);
     }
 
-    @LogAnnotation(module = "changePassword")
     @PutMapping("/{username}")
+    @LogAnnotation(module = "修改密码")
     @RequiresPermissions("sys:user:password")
     public void changePassword(String oldPassword, String newPassword, @PathVariable String username) {
         userService.changePassword(username, oldPassword, newPassword);
     }
 
-    @LogAnnotation(module = "getById")
     @GetMapping("/{id}")
     public SysUser get(@PathVariable Long id) {
         return userService.getById(id);
     }
 
-    @LogAnnotation(module = "updateHeadImgUrl")
     @PutMapping(params = "headImgUrl")
+    @LogAnnotation(module = "修改头像")
     public void updateHeadImgUrl(String headImgUrl) {
         SysUser user = UserUtil.getCurrentUser();
         UserDto userDto = new UserDto();

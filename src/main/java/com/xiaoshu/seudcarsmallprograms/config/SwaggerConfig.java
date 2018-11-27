@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -33,7 +34,8 @@ public class SwaggerConfig {
 						.title("swagger接口文档")
 						.contact(new Contact("cnsu-cmh", "", "cmh19940105@163.com")).version("1.0").build())
 				.globalOperationParameters(Lists.newArrayList(builder.build()))
-				.select().paths(PathSelectors.any()).build();
+				.select().apis(RequestHandlerSelectors.basePackage("com.xiaoshu.seudcarsmallprograms.controller.api"))
+				.paths(PathSelectors.any()).build();
 	}
 
 //	@Bean

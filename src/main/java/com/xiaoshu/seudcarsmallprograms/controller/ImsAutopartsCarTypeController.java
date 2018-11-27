@@ -13,9 +13,7 @@ import com.xiaoshu.seudcarsmallprograms.page.table.PageTableResponse;
 import com.xiaoshu.seudcarsmallprograms.service.ImsAutopartsCarTypeService;
 import com.xiaoshu.seudcarsmallprograms.model.ImsAutopartsCarType;
 
-import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "车类型")
 @RestController
 @RequestMapping("/imsAutopartsCarTypes")
 public class ImsAutopartsCarTypeController {
@@ -23,7 +21,7 @@ public class ImsAutopartsCarTypeController {
     @Autowired
     private ImsAutopartsCarTypeService imsAutopartsCarTypeService;
 
-    @LogAnnotation(module = "save")
+    @LogAnnotation(module = "保存")
     @PostMapping
     public ImsAutopartsCarType save(@RequestBody ImsAutopartsCarType imsAutopartsCarType) {
         imsAutopartsCarTypeService.saveImsAutopartsCarType(imsAutopartsCarType);
@@ -32,7 +30,6 @@ public class ImsAutopartsCarTypeController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "根据id获取")
     public ImsAutopartsCarType get(@PathVariable Long id) {
         return imsAutopartsCarTypeService.getById(id);
     }
@@ -46,7 +43,6 @@ public class ImsAutopartsCarTypeController {
     }
 
     @GetMapping
-    @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request) {
 
         PageTableHandler.CountHandler countHandler = (r) -> imsAutopartsCarTypeService.selectConditionCount(r.getParams());
@@ -61,20 +57,32 @@ public class ImsAutopartsCarTypeController {
         imsAutopartsCarTypeService.delete(id);
     }
 
+    /**
+     *  根据类型名称模糊查询
+     * @param name
+     * @return
+     */
     @GetMapping("/like/{name}")
-    @ApiOperation(value = "根据类型名称模糊查询，比如“宝马8系")
     public List<ImsAutopartsCarType> getByNameLike(@PathVariable String name) {
         return imsAutopartsCarTypeService.getByNameLike(name);
     }
 
+    /**
+     * 根据类型名称精确查询
+     * @param name
+     * @return
+     */
     @GetMapping("/equals/{name}")
-    @ApiOperation(value = "根据类型名称精确查询，比如“宝马8系")
     public ImsAutopartsCarType getByName(@PathVariable String name) {
         return imsAutopartsCarTypeService.getByName(name);
     }
 
+    /**
+     * 根据品牌ID查询
+     * @param brandId
+     * @return
+     */
     @GetMapping("/brandId/{brandId}")
-    @ApiOperation(value = "根据品牌ID查询，比如“185")
     public List<ImsAutopartsCarType> getByBrandId(@PathVariable Long brandId) {
         return imsAutopartsCarTypeService.getByBrandId(brandId);
     }

@@ -23,7 +23,7 @@ public class MailController {
 	@Autowired
 	private MailService mailService;
 
-	@LogAnnotation(module = "mail:send")
+	@LogAnnotation(module = "保存并且发送邮件")
 	@PostMapping
 	@RequiresPermissions("mail:send")
 	public Mail save(@RequestBody Mail mail) {
@@ -43,21 +43,33 @@ public class MailController {
 		return mail;
 	}
 
-	@LogAnnotation(module = "mail:all:query")
+	/**
+	 * 根据id获取邮件
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/{id}")
 	@RequiresPermissions("mail:all:query")
 	public Mail get(@PathVariable Long id) {
 		return mailService.getById(id);
 	}
 
-	@LogAnnotation(module = "mail:getMailTo")
+	/**
+	 * 根据id获取邮件发送详情
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/{id}/to")
 	@RequiresPermissions("mail:all:query")
 	public List<MailTo> getMailTo(@PathVariable Long id) {
 		return mailService.getToUsers(id);
 	}
 
-	@LogAnnotation(module = "mail:list")
+	/**
+	 * 邮件列表
+	 * @param request
+	 * @return
+	 */
 	@GetMapping
 	@RequiresPermissions("mail:all:query")
 	public PageTableResponse list(PageTableRequest request) {
@@ -71,3 +83,4 @@ public class MailController {
 	}
 
 }
+

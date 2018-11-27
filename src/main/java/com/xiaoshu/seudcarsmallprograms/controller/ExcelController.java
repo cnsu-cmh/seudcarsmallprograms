@@ -28,7 +28,7 @@ public class ExcelController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @LogAnnotation(module = "checkSql")
+    @LogAnnotation(module = "校验sql，并返回sql返回的数量")
     @PostMapping("/sql-count")
     public Integer checkSql(String sql) {
         log.info(sql);
@@ -55,7 +55,7 @@ public class ExcelController {
         return sql;
     }
 
-    @LogAnnotation(module = "downloadExcel")
+    @LogAnnotation(module = "根据sql导出excel")
     @PostMapping
     @RequiresPermissions("excel:down")
     public void downloadExcel(String sql, String fileName, HttpServletResponse response) {
@@ -87,7 +87,7 @@ public class ExcelController {
         }
     }
 
-    @LogAnnotation(module = "excel showData")
+    @LogAnnotation(module = "根据sql在页面显示结果")
     @PostMapping("/show-datas")
     @RequiresPermissions("excel:show:datas")
     public List<Object[]> showData(String sql) {

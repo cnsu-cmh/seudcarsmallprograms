@@ -1,7 +1,6 @@
 package com.xiaoshu.seudcarsmallprograms.controller;
 
 
-import com.xiaoshu.seudcarsmallprograms.annotation.LogAnnotation;
 import com.xiaoshu.seudcarsmallprograms.page.table.PageTableHandler;
 import com.xiaoshu.seudcarsmallprograms.page.table.PageTableRequest;
 import com.xiaoshu.seudcarsmallprograms.page.table.PageTableResponse;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/logs")
 public class SysLogsController {
@@ -19,7 +19,6 @@ public class SysLogsController {
     @Autowired
     private SysLogsService sysLogsService;
 
-    @LogAnnotation(module = "log:list")
     @GetMapping
     @RequiresPermissions(value = "sys:log:query")
     public PageTableResponse list(PageTableRequest request) {

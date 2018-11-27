@@ -22,7 +22,6 @@ public class SysRoleController {
     @Autowired
     private SysRoleService roleService;
 
-    @LogAnnotation(module = "listRoles")
     @GetMapping
     @RequiresPermissions("sys:role:query")
     public PageTableResponse listRoles(PageTableRequest request) {
@@ -34,35 +33,42 @@ public class SysRoleController {
         return new PageTableHandler(countHandler,listHandler).handle(request);
     }
 
-    @LogAnnotation(module = "selectAll")
     @GetMapping("/all")
     @RequiresPermissions(value = { "sys:user:query", "sys:role:query" }, logical = Logical.OR)
     public List<SysRole> roles() {
         return roleService.selectAll();
     }
 
-    @LogAnnotation(module = "selectByUserId")
+    /**
+     * 根据用户id获取拥有的角色
+     * @param userId
+     * @return
+     */
     @GetMapping(params = "userId")
     @RequiresPermissions(value = { "sys:user:query", "sys:role:query" }, logical = Logical.OR)
     public List<SysRole> roles(Long userId) {
         return roleService.selectByUserId(userId);
     }
 
-    @LogAnnotation(module = "role:add")
+    @LogAnnotation(module = "保存角色")
     @PostMapping
     @RequiresPermissions("sys:role:add")
     public void saveRole(@RequestBody RoleDto roleDto) {
         roleService.saveRole(roleDto);
     }
 
-    @LogAnnotation(module = "deleteRole")
+    @LogAnnotation(module = "删除角色")
     @DeleteMapping("/{id}")
     @RequiresPermissions(value = { "sys:role:del" })
     public void delete(@PathVariable Long id) {
         roleService.deleteRole(id);
     }
 
-    @LogAnnotation(module = "getById")
+    /**
+     * 根据id获取角色
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @RequiresPermissions("sys:role:query")
     public SysRole get(@PathVariable Long id) {

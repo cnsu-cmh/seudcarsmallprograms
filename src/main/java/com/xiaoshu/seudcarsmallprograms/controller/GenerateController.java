@@ -1,7 +1,6 @@
 package com.xiaoshu.seudcarsmallprograms.controller;
 
 
-import com.xiaoshu.seudcarsmallprograms.annotation.LogAnnotation;
 import com.xiaoshu.seudcarsmallprograms.dto.BeanField;
 import com.xiaoshu.seudcarsmallprograms.dto.GenerateDetail;
 import com.xiaoshu.seudcarsmallprograms.dto.GenerateInput;
@@ -21,7 +20,11 @@ public class GenerateController {
     @Autowired
     private GenerateService generateService;
 
-    @LogAnnotation(module = "generateByTableName")
+    /**
+     * 代码生成,根据表名显示表信息
+     * @param tableName
+     * @return
+     */
     @GetMapping(params = { "tableName" })
     @RequiresPermissions("generate:edit")
     public GenerateDetail generateByTableName(String tableName) {
@@ -37,7 +40,10 @@ public class GenerateController {
         return detail;
     }
 
-    @LogAnnotation(module = "save")
+    /**
+     * 生成代码
+     * @param input
+     */
     @PostMapping
     @RequiresPermissions("generate:edit")
     public void save(@RequestBody GenerateInput input) {

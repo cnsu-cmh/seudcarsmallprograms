@@ -3,13 +3,7 @@ package com.xiaoshu.seudcarsmallprograms.controller;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.xiaoshu.seudcarsmallprograms.annotation.LogAnnotation;
 import com.xiaoshu.seudcarsmallprograms.constants.UserConstants;
-import com.xiaoshu.seudcarsmallprograms.dto.Token;
-import com.xiaoshu.seudcarsmallprograms.model.SysUser;
-import com.xiaoshu.seudcarsmallprograms.token.TokenManager;
 import com.xiaoshu.seudcarsmallprograms.util.ResponseEntity;
-import com.xiaoshu.seudcarsmallprograms.util.UserUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -34,7 +28,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@Api(tags = "登陆")
 @RestController
 public class LonginController {
 
@@ -46,10 +39,6 @@ public class LonginController {
 
     @Autowired
     private ServerProperties serverProperties;
-
-    @Autowired
-    private TokenManager tokenManager;
-
 
     @GetMapping("/getCaptcha")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -115,21 +104,6 @@ public class LonginController {
                 return ResponseEntity.failure(errorMsg);
             }
         }
-    }
-
-    @ApiOperation(value = "Restful方式登陆,前后端分离时登录接口")
-    @PostMapping("/admin/login/restful")
-    public Token restfulLogin(String username, String password) {
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        SecurityUtils.getSubject().login(usernamePasswordToken);
-
-        return tokenManager.saveToken(usernamePasswordToken);
-    }
-
-    @ApiOperation(value = "当前登录用户")
-    @GetMapping("/admin/loginInfo")
-    public SysUser getLoginInfo() {
-        return UserUtil.getCurrentUser();
     }
 
 }

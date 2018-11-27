@@ -31,7 +31,8 @@ public class SysPermissionController {
     @Autowired
     private SysPermissionService permissionService;
 
-    @LogAnnotation(module = "permissionsCurrent")
+
+    @LogAnnotation(module = "当前登录用户拥有的权限")
     @GetMapping("/current")
     public List<SysPermission> permissionsCurrent() {
         List<SysPermission> list = UserUtil.getCurrentPermissions();
@@ -67,8 +68,8 @@ public class SysPermissionController {
      *
      * @return
      */
-    @LogAnnotation(module = "ownsPermission")
     @GetMapping("/owns")
+    @LogAnnotation(module = "校验当前用户的权限")
     public Set<String> ownsPermission() {
         List<SysPermission> permissions = UserUtil.getCurrentPermissions();
         if (CollectionUtils.isEmpty(permissions)) {
@@ -79,7 +80,6 @@ public class SysPermissionController {
                 .map(SysPermission::getPermission).collect(Collectors.toSet());
     }
 
-    @LogAnnotation(module = "permissionsList")
     @GetMapping
     @RequiresPermissions("sys:menu:query")
     public List<SysPermission> permissionsList() {
@@ -103,7 +103,6 @@ public class SysPermissionController {
     }
 
 
-    @LogAnnotation(module = "permissionsAll")
     @GetMapping("/all")
     @RequiresPermissions("sys:menu:query")
     public JSONArray permissionsAll() {
@@ -114,7 +113,6 @@ public class SysPermissionController {
         return array;
     }
 
-    @LogAnnotation(module = "parentMenu")
     @GetMapping("/parents")
     @RequiresPermissions("sys:menu:query")
     public List<SysPermission> parentMenu() {
@@ -146,36 +144,35 @@ public class SysPermissionController {
         }
     }
 
-    @LogAnnotation(module = "listByRoleId")
     @GetMapping(params = "roleId")
+    @LogAnnotation(module = "根据角色id删除权限")
     @RequiresPermissions(value = { "sys:menu:query", "sys:role:query" }, logical = Logical.OR)
     public List<SysPermission> listByRoleId(Long roleId) {
         return permissionService.selectByRoleId(roleId);
     }
 
-    @LogAnnotation(module = "permission save")
     @PostMapping
+    @LogAnnotation(module = "保存菜单")
     @RequiresPermissions("sys:menu:add")
     public void save(@RequestBody SysPermission permission) {
         permissionService.save(permission);
     }
 
-    @LogAnnotation(module = "permission get")
     @GetMapping("/{id}")
     @RequiresPermissions("sys:menu:query")
     public SysPermission get(@PathVariable Long id) {
         return permissionService.getById(id);
     }
 
-    @LogAnnotation(module = "permission update")
     @PutMapping
+    @LogAnnotation(module = "修改菜单")
     @RequiresPermissions("sys:menu:add")
     public void update(@RequestBody SysPermission permission) {
         permissionService.update(permission);
     }
 
-    @LogAnnotation(module = "permission delete")
     @DeleteMapping("/{id}")
+    @LogAnnotation(module = "删除菜单")
     @RequiresPermissions(value = { "sys:menu:del" })
     public void delete(@PathVariable Long id) {
         permissionService.delete(id);
