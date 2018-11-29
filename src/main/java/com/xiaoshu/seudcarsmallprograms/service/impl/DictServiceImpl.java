@@ -64,4 +64,9 @@ public class DictServiceImpl implements DictService {
     public void delete(Long id) {
         dictMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<Map<String, String>> selectAllType() {
+        return dictMapper.selectAllType();
+    }
 }

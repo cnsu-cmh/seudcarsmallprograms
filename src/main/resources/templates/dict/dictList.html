@@ -42,6 +42,7 @@
                                 </tr>                       
                                 <tr>
 									<th>id</th>
+                                    <th>typeName</th>
 									<th>type</th>
 									<th>k</th>
 									<th>val</th>
@@ -90,6 +91,7 @@ function init(){
         	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
             "columns": [
 				{"data" : "id", "defaultContent" : ""},
+                {"data" : "typeName", "defaultContent" : ""},
 				{"data" : "type", "defaultContent" : ""},
 				{"data" : "k", "defaultContent" : ""},
 				{"data" : "val", "defaultContent" : ""},
@@ -106,8 +108,7 @@ function init(){
              		            var del = buttonDel(id, "dict:del", pers);
                                 return edit + del;
                	            }		
-				},
-                
+				}
             ]
         } );
 }
@@ -128,7 +129,6 @@ function del(id){
                 layer.msg("删除成功");
             }
         });
-        
         layer.close(1);
     });
 }

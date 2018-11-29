@@ -22,4 +22,6 @@ public interface DictService {
     void update(Dict dict);
 
     void delete(Long id);
+
+    List<Map<String, String>> selectAllType();
 }

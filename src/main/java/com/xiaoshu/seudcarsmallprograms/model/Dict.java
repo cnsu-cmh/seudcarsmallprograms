@@ -5,6 +5,7 @@ public class Dict extends BaseEntity<Long> {
 	private static final long serialVersionUID = 1356894294659068449L;
 
 	private String type;
+	private String typeName;
 	private String k;
 	private String val;
 
@@ -44,4 +45,11 @@ public class Dict extends BaseEntity<Long> {
 		this.val = val;
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
 }
