@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 29/11/2018 21:18:48
+ Date: 30/11/2018 19:57:43
 */
 
 SET NAMES utf8mb4;
@@ -32,13 +32,11 @@ CREATE TABLE `car_basics`  (
   `market_time` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '上市时间',
   `energy_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '能源类型（汽油）',
   `max_power` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '最大功率（kw）',
-  `
-engine` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '发动机（2.0T 286马力 L4）',
+  `engine` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '发动机（2.0T 286马力 L4）',
   `gear-box` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '变速箱(6挡双离合)',
   `car_structure` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '车身结构',
   `acceleration` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '0~100加速',
-  `
-oyster_sauce` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '耗油',
+  `oyster_sauce` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '耗油',
   `guarantee` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '整车质保',
   `colour` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '颜色',
   `playing_cards` date NULL DEFAULT NULL COMMENT '首次上牌',
@@ -90,8 +88,7 @@ CREATE TABLE `car_engine`  (
   `displacement` int(10) NULL DEFAULT NULL COMMENT '排量（ml）',
   `displacement_l` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '排量L(2.0)',
   `intake_form` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '进气形式(涡轮增压)',
-  `
-cylinder_arr` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '气缸排列形式',
+  `cylinder_arr` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '气缸排列形式',
   `cylinder_num` int(2) NULL DEFAULT NULL COMMENT '气缸个数',
   `cylinder_valve` int(2) NULL DEFAULT NULL COMMENT '每缸气门数',
   `max_horsepower` int(5) NULL DEFAULT NULL COMMENT '最大马力(Ps)',
@@ -99,11 +96,9 @@ cylinder_arr` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL 
   `max_power_speed` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '最大功率转速(rpm)',
   `fuel_form` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '燃料形式',
   `fuel_grade` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '燃油标号',
-  `
-fuel_supply_mode` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '供油方式',
+  `fuel_supply_mode` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '供油方式',
   `cylinder_head_material` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '缸盖材料',
-  `
-cylinder_block_material` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '缸体材料',
+  `cylinder_block_material` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '缸体材料',
   `env_protection` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '环保标准',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_car_engine_basics`(`car_id`) USING BTREE,
@@ -3771,7 +3766,7 @@ CREATE TABLE `sys_logs`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE,
   INDEX `user_id`(`user`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logs
@@ -3829,6 +3824,48 @@ INSERT INTO `sys_logs` VALUES (50, 1, 'web端登陆', 1, NULL, '2018-11-26 20:19
 INSERT INTO `sys_logs` VALUES (51, 1, 'web端登陆', 1, NULL, '2018-11-26 20:27:05');
 INSERT INTO `sys_logs` VALUES (52, 1, '文件上传', 1, NULL, '2018-11-26 20:49:36');
 INSERT INTO `sys_logs` VALUES (53, 1, '修改头像', 1, NULL, '2018-11-26 20:49:36');
+INSERT INTO `sys_logs` VALUES (54, 1, 'web端登陆', 1, NULL, '2018-11-30 12:58:37');
+INSERT INTO `sys_logs` VALUES (55, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 12:58:37');
+INSERT INTO `sys_logs` VALUES (56, 1, 'web端登陆', 1, NULL, '2018-11-30 13:14:33');
+INSERT INTO `sys_logs` VALUES (57, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:14:33');
+INSERT INTO `sys_logs` VALUES (58, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:18:08');
+INSERT INTO `sys_logs` VALUES (59, 1, 'web端登陆', 1, NULL, '2018-11-30 13:20:20');
+INSERT INTO `sys_logs` VALUES (60, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:20:20');
+INSERT INTO `sys_logs` VALUES (61, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:22:44');
+INSERT INTO `sys_logs` VALUES (62, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:23:06');
+INSERT INTO `sys_logs` VALUES (63, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:23:06');
+INSERT INTO `sys_logs` VALUES (64, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:23:07');
+INSERT INTO `sys_logs` VALUES (65, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:23:08');
+INSERT INTO `sys_logs` VALUES (66, 1, 'web端登陆', 1, NULL, '2018-11-30 13:25:58');
+INSERT INTO `sys_logs` VALUES (67, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:25:58');
+INSERT INTO `sys_logs` VALUES (68, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:05');
+INSERT INTO `sys_logs` VALUES (69, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:05');
+INSERT INTO `sys_logs` VALUES (70, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:05');
+INSERT INTO `sys_logs` VALUES (71, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:05');
+INSERT INTO `sys_logs` VALUES (72, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (73, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (74, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (75, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (76, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (77, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:26:06');
+INSERT INTO `sys_logs` VALUES (78, 1, 'web端登陆', 1, NULL, '2018-11-30 13:27:41');
+INSERT INTO `sys_logs` VALUES (79, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:27:41');
+INSERT INTO `sys_logs` VALUES (80, 1, 'web端登陆', 1, NULL, '2018-11-30 13:29:08');
+INSERT INTO `sys_logs` VALUES (81, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:29:08');
+INSERT INTO `sys_logs` VALUES (82, 1, 'web端登陆', 1, NULL, '2018-11-30 13:49:52');
+INSERT INTO `sys_logs` VALUES (83, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:49:53');
+INSERT INTO `sys_logs` VALUES (84, 1, 'web端登陆', 1, NULL, '2018-11-30 13:55:58');
+INSERT INTO `sys_logs` VALUES (85, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:55:58');
+INSERT INTO `sys_logs` VALUES (86, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:58:22');
+INSERT INTO `sys_logs` VALUES (87, 1, 'web端登陆', 1, NULL, '2018-11-30 13:59:06');
+INSERT INTO `sys_logs` VALUES (88, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 13:59:06');
+INSERT INTO `sys_logs` VALUES (89, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 14:00:09');
+INSERT INTO `sys_logs` VALUES (90, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 14:01:02');
+INSERT INTO `sys_logs` VALUES (91, 1, 'web端登陆', 1, NULL, '2018-11-30 14:12:18');
+INSERT INTO `sys_logs` VALUES (92, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 14:12:19');
+INSERT INTO `sys_logs` VALUES (93, 1, 'web端登陆', 1, NULL, '2018-11-30 14:15:04');
+INSERT INTO `sys_logs` VALUES (94, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 14:15:04');
+INSERT INTO `sys_logs` VALUES (95, 1, '当前登录用户拥有的权限', 1, NULL, '2018-11-30 14:17:47');
 
 -- ----------------------------
 -- Table structure for sys_permission
