@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form class="form-horizontal" onsubmit="return false" id="form">
+		<fieldset>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>carId</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='carId' type='text' name='carId' id='carId' data-bv-notempty='true' data-bv-notempty-message='carId 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>type</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='type' type='text' name='type' id='type' data-bv-notempty='true' data-bv-notempty-message='type 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>displacement</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='displacement' type='text' name='displacement' id='displacement' data-bv-notempty='true' data-bv-notempty-message='displacement 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>displacementL</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='displacementL' type='text' name='displacementL' id='displacementL' data-bv-notempty='true' data-bv-notempty-message='displacementL 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>intakeForm</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='intakeForm' type='text' name='intakeForm' id='intakeForm' data-bv-notempty='true' data-bv-notempty-message='intakeForm 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>cylinderArr</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='cylinderArr' type='text' name='cylinderArr' id='cylinderArr' data-bv-notempty='true' data-bv-notempty-message='cylinderArr 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>cylinderNum</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='cylinderNum' type='text' name='cylinderNum' id='cylinderNum' data-bv-notempty='true' data-bv-notempty-message='cylinderNum 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>cylinderValve</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='cylinderValve' type='text' name='cylinderValve' id='cylinderValve' data-bv-notempty='true' data-bv-notempty-message='cylinderValve 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>maxHorsepower</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='maxHorsepower' type='text' name='maxHorsepower' id='maxHorsepower' data-bv-notempty='true' data-bv-notempty-message='maxHorsepower 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>maxPower</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='maxPower' type='text' name='maxPower' id='maxPower' data-bv-notempty='true' data-bv-notempty-message='maxPower 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>maxPowerSpeed</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='maxPowerSpeed' type='text' name='maxPowerSpeed' id='maxPowerSpeed' data-bv-notempty='true' data-bv-notempty-message='maxPowerSpeed 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>fuelForm</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='fuelForm' type='text' name='fuelForm' id='fuelForm' data-bv-notempty='true' data-bv-notempty-message='fuelForm 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>fuelGrade</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='fuelGrade' type='text' name='fuelGrade' id='fuelGrade' data-bv-notempty='true' data-bv-notempty-message='fuelGrade 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>fuelSupplyMode</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='fuelSupplyMode' type='text' name='fuelSupplyMode' id='fuelSupplyMode' data-bv-notempty='true' data-bv-notempty-message='fuelSupplyMode 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>cylinderHeadMaterial</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='cylinderHeadMaterial' type='text' name='cylinderHeadMaterial' id='cylinderHeadMaterial' data-bv-notempty='true' data-bv-notempty-message='cylinderHeadMaterial 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>cylinderBlockMaterial</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='cylinderBlockMaterial' type='text' name='cylinderBlockMaterial' id='cylinderBlockMaterial' data-bv-notempty='true' data-bv-notempty-message='cylinderBlockMaterial 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>envProtection</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='envProtection' type='text' name='envProtection' id='envProtection' data-bv-notempty='true' data-bv-notempty-message='envProtection 不能为空'>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+					    <button class="btn btn-primary" onclick="location.href='carEngineList'">返回</button>
+						<button class="btn btn-primary" type="submit" onclick="add()">
+							<i class="fa fa-save"></i> 保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+	<script type="text/javascript" th:src="@{/static/js/libs/jquery-2.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/plugin/bootstrapvalidator/bootstrapValidator.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+	<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/jq.js}"></script>
+	<script type="text/javascript">
+		var layer;
+		layui.use(['layer','laydate'], function(){
+		    layer = layui.layer;
+		});
+		
+		function add() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+		    if(!bootstrapValidator.isValid()){
+			   return;
+		    }
+		    
+		    var formdata = $("#form").serializeObject();
+
+			$.ajax({
+				type : 'post',
+				url : '/carEngines',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("添加成功", {shift: -1, time: 1000}, function(){
+                        location.href = "carEngineList";
+                    });
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

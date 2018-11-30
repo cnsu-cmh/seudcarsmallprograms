@@ -104,6 +104,7 @@ public class GenerateServiceImpl implements GenerateService {
     public void saveCode(GenerateInput input) {
         checkTableName(input.getTableName());
         GeneratorUtil.saveModelAndMapper(input.getTableName());
+
         TemplateUtil.saveTemplete(input, TemplateUtil.TemplateType.CONTROLLER);
         TemplateUtil.saveTemplete(input, TemplateUtil.TemplateType.SERVICE);
         TemplateUtil.saveTemplete(input, TemplateUtil.TemplateType.SERVICEIMPL);
