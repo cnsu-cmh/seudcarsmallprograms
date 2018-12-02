@@ -124,7 +124,7 @@
     layui.use(['layer'], function(){
         layer = layui.layer;
         var isDefaultPassword = $("#isDefaultPassword").val();
-        if(isDefaultPassword && isDefaultPassword == true ) {
+        if(isDefaultPassword && isDefaultPassword == "true" ) {
 			layer.msg("你的密码为默认密码，建议修改密码后重新登陆！",{shift: -1, time: 3000});
 		}
     });

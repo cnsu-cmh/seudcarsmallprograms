@@ -80,4 +80,11 @@ public class ImsAutopartsCarBrandServiceImpl implements ImsAutopartsCarBrandServ
         return imsAutopartsCarBrandMapper.selectOne(brand);
     }
 
+    @Override
+    public List<ImsAutopartsCarBrand> selectAll() {
+        Example example = new Example(ImsAutopartsCarBrand.class);
+        example.orderBy("initials").asc();
+        return imsAutopartsCarBrandMapper.selectByExample(example);
+    }
+
 }

@@ -7,12 +7,12 @@ import javax.persistence.*;
 public class ImsAutopartsCarBrand extends BaseTransientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer uniacid;
+    private Long uniacid;
 
     @Column(name = "parent_id")
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 首字母
@@ -37,42 +37,42 @@ public class ImsAutopartsCarBrand extends BaseTransientEntity {
     /**
      * @return id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * @return uniacid
      */
-    public Integer getUniacid() {
+    public Long getUniacid() {
         return uniacid;
     }
 
     /**
      * @param uniacid
      */
-    public void setUniacid(Integer uniacid) {
+    public void setUniacid(Long uniacid) {
         this.uniacid = uniacid;
     }
 
     /**
      * @return parent_id
      */
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
     /**
      * @param parentId
      */
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

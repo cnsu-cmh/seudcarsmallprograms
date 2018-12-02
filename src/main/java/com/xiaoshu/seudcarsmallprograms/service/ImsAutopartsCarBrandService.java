@@ -22,4 +22,6 @@ public interface ImsAutopartsCarBrandService {
     List<ImsAutopartsCarBrand>  getByNameLike(String name);
 
     ImsAutopartsCarBrand getByName(String name);
+
+    List<ImsAutopartsCarBrand> selectAll();
 }

@@ -2,10 +2,21 @@ package com.xiaoshu.seudcarsmallprograms.controller;
 
 import com.xiaoshu.seudcarsmallprograms.constants.UserConstants;
 import com.xiaoshu.seudcarsmallprograms.model.SysUser;
+import com.xiaoshu.seudcarsmallprograms.service.DictService;
+import com.xiaoshu.seudcarsmallprograms.service.ImsAutopartsCarBrandService;
+import com.xiaoshu.seudcarsmallprograms.service.SellerInformationService;
+import com.xiaoshu.seudcarsmallprograms.service.impl.DictServiceImpl;
+import com.xiaoshu.seudcarsmallprograms.service.impl.ImsAutopartsCarBrandServiceImpl;
+import com.xiaoshu.seudcarsmallprograms.service.impl.SellerInformationServiceImpl;
+import com.xiaoshu.seudcarsmallprograms.util.SpringUtil;
 import com.xiaoshu.seudcarsmallprograms.util.UserUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/pages")
@@ -131,7 +142,14 @@ public class PagesController {
     }
 
     @RequestMapping("/dict/addDict")
-    public String addDict(){
+    public String addDict(ModelMap map){
+        DictService dictService = SpringUtil.getBean(DictServiceImpl.class);
+        List<Map<String, String>> maps = dictService.selectAllType();
+        Map<String,String> typeNames = new HashMap<>();
+        maps.forEach( m -> {
+            typeNames.put(m.get("typeName"),m.get("type"));
+        });
+        map.put("typeNames",typeNames );
         return "dict/addDict";
     }
 
@@ -163,4 +181,49 @@ public class PagesController {
         return "mail/mailDetail";
     }
 
+    /**-----------------carBasicss-------------------------**/
+    @RequestMapping("/carBasicss/carBasicsList")
+    public String carBasicsList(){
+        return "carBasics/carBasicsList";
+    }
+
+    @RequestMapping("/carBasicss/addCarBasics")
+    public String addCarBasics(ModelMap map){
+        ImsAutopartsCarBrandService brandService = SpringUtil.getBean(ImsAutopartsCarBrandServiceImpl.class);
+        DictService dictService = SpringUtil.getBean(DictServiceImpl.class);
+        SellerInformationService sellerService = SpringUtil.getBean(SellerInformationServiceImpl.class);
+        map.put("carBasics",brandService.selectAll());
+        map.put("carLevels",dictService.selectByType("carLevel"));
+        map.put("sellers",sellerService.selectAll());
+        return "carBasics/addCarBasics";
+    }
+
+//    /**-----------------carBody-------------------------**/
+//    @RequestMapping("/carBodys/addCarBody")
+//    public String addCarBody(){
+//        return "carBody/addCarBody";
+//    }
+//
+//    /**-----------------carEngine-------------------------**/
+//    @RequestMapping("/carEngines/addCarEngine")
+//    public String addCarEngine(){
+//        return "carEngine/addCarEngine";
+//    }
+
+
+    /**-----------------sellerInformation-------------------------**/
+    @RequestMapping("/sellerInformation/addSellerInformation")
+    public String addSellerInformation(){
+        return "sellerInformation/addSellerInformation";
+    }
+
+    @RequestMapping("/sellerInformation/sellerInformationList")
+    public String sellerInformationList(){
+        return "sellerInformation/sellerInformationList";
+    }
+
+    @RequestMapping("/sellerInformation/updateSellerInformation")
+    public String updateSellerInformation(){
+        return "sellerInformation/updateSellerInformation";
+    }
 }

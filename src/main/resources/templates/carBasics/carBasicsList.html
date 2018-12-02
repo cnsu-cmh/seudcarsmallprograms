@@ -41,27 +41,16 @@
                                 <tr>
                                 </tr>                       
                                 <tr>
-									<th>id</th>
-									<th>brand</th>
-									<th>type</th>
-									<th>name</th>
-									<th>guidancePrice</th>
-									<th>manufacturer</th>
-									<th>level</th>
-									<th>marketTime</th>
-									<th>energyType</th>
-									<th>maxPower</th>
-									<th>engine</th>
-									<th>gear-box</th>
-									<th>carStructure</th>
-									<th>acceleration</th>
-									<th>oysterSauce</th>
-									<th>guarantee</th>
-									<th>colour</th>
-									<th>playingCards</th>
-									<th>createTime</th>
-									<th>updateTime</th>
-									<th>sellingPrice</th>
+									<th>welPic</th>
+									<th>品牌</th>
+									<th>车型</th>
+									<th>名称</th>
+									<th>级别</th>
+									<th>上市时间</th>
+									<th>发动机</th>
+									<th>变速箱</th>
+									<th>首次上牌</th>
+									<th>价格</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -86,7 +75,9 @@ layui.use('layer', function(){
     layer = layui.layer;
 });
 var pers = checkPermission();
-
+var pro = window.location.protocol;
+var host = window.location.host;
+var domain = pro + "//" + host;
 var example;
 function init(){
 	example = 
@@ -101,45 +92,40 @@ function init(){
         		"url" : "/carBasicss",
         		"type":"get",
         		"data":function(d){
-    				d.id = $("#id").val();
+    				d.type = $("#type").val();
     			}
         	},
         	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
             "columns": [
-				{"data" : "id", "defaultContent" : ""},
+                {"data" : "", "defaultContent" : "","orderable":false,
+                    "render": function (data, type, row) {
+                        var url = domain + "/files" + row['welPic'];
+                        return "<a target='_blank' href='" + url +"'><img width='30' src='" + url + "'></img></a>";
+                    }
+				},
 				{"data" : "brand", "defaultContent" : ""},
 				{"data" : "type", "defaultContent" : ""},
 				{"data" : "name", "defaultContent" : ""},
-				{"data" : "guidancePrice", "defaultContent" : ""},
-				{"data" : "manufacturer", "defaultContent" : ""},
 				{"data" : "level", "defaultContent" : ""},
 				{"data" : "marketTime", "defaultContent" : ""},
-				{"data" : "energyType", "defaultContent" : ""},
-				{"data" : "maxPower", "defaultContent" : ""},
 				{"data" : "engine", "defaultContent" : ""},
 				{"data" : "gear-box", "defaultContent" : ""},
-				{"data" : "carStructure", "defaultContent" : ""},
-				{"data" : "acceleration", "defaultContent" : ""},
-				{"data" : "oysterSauce", "defaultContent" : ""},
-				{"data" : "guarantee", "defaultContent" : ""},
-				{"data" : "colour", "defaultContent" : ""},
 				{"data" : "playingCards", "defaultContent" : ""},
-				{"data" : "createTime", "defaultContent" : ""},
-				{"data" : "updateTime", "defaultContent" : ""},
 				{"data" : "sellingPrice", "defaultContent" : ""},
 				{ 
-								"data": "", 
-								"defaultContent": "",
-								"orderable":false,
-						        "render": function (data, type, row) {
-                		           var id = row['id'];
-                		           var href = "/pages/carBasics/updateCarBasics?id=" + id;
-                                   var edit = buttonEdit(href, "", pers);
-                		           var del = buttonDel(id, "", pers);
-                                   return edit + del;
-                  	            }		
-							},
-                
+					"data": "",
+					"defaultContent": "",
+					"orderable":false,
+					"render": function (data, type, row) {
+					   var id = row['id'];
+					   var viewHref = "/pages/carBasics/viewCarBasics?id=" + id;
+					   var editHref = "/pages/carBasics/updateCarBasics?id=" + id;
+					   var view = buttonView(viewHref, "", pers);
+					   var edit = buttonEdit(editHref, "", pers);
+					   var under = buttonUnder(id, "", pers);
+					   return view + edit + under;
+					}
+				},
             ]
         } );
 }
@@ -157,6 +143,23 @@ function del(id){
             }
         });
         
+        layer.close(1);
+    });
+}
+
+function under(id){
+    layer.confirm('确定要下架吗？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            type : 'put',
+            url : '/carBasicss/under/'+id,
+            success : function(data) {
+                example.ajax.reload();
+                layer.msg("下架成功");
+            }
+        });
+
         layer.close(1);
     });
 }

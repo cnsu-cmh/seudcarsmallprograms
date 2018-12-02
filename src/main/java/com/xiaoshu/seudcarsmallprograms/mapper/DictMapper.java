@@ -9,6 +9,6 @@ import java.util.Map;
 
 public interface DictMapper extends MyMapper<Dict> {
 
-    @Select("select distinct type,type_name from dict ")
+    @Select("select distinct type,type_name typeName from dict ")
     List<Map<String, String>> selectAllType();
 }

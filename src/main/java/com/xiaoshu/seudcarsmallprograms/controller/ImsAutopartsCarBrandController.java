@@ -75,4 +75,13 @@ public class ImsAutopartsCarBrandController {
     public ImsAutopartsCarBrand  get(@PathVariable String name) {
         return imsAutopartsCarBrandService.getByName(name);
     }
+
+    /**
+     * 所有车品牌
+     * @return
+     */
+    @GetMapping(value = "/allBrand")
+    public List<ImsAutopartsCarBrand> listAll() {
+        return imsAutopartsCarBrandService.selectAll();
+    }
 }

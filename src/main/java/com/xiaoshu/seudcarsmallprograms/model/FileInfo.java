@@ -63,8 +63,16 @@ public class FileInfo extends BaseEntity<Long> {
 		this.type = type;
 	}
 
+	public Long getcId() {
+		return cId;
+	}
+
 	public void setcId(Long cId) {
 		this.cId = cId;
+	}
+
+	public Integer getcType() {
+		return cType;
 	}
 
 	public void setcType(Integer cType) {
@@ -72,6 +80,6 @@ public class FileInfo extends BaseEntity<Long> {
 	}
 
 	public interface CarType{
-		int wel = 1;
+		int car = 1;
 	}
 }

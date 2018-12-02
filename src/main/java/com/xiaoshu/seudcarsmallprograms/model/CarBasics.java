@@ -5,10 +5,9 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "car_basics")
-public class CarBasics extends BaseTransientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CarBasics extends BaseEntity<Long> {
+
+    private static final long serialVersionUID = 4976087425280780950L;
 
     /**
      * 品牌
@@ -67,7 +66,7 @@ public class CarBasics extends BaseTransientEntity {
     /**
      * 变速箱(6挡双离合)
      */
-    @Column(name = "gear-box")
+    @Column(name = "gear_box")
     private String gearBox;
 
     /**
@@ -101,13 +100,7 @@ public class CarBasics extends BaseTransientEntity {
      * 首次上牌
      */
     @Column(name = "playing_cards")
-    private Date playingCards;
-
-    @Column(name = "create_time")
-    private Date createTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
+    private String playingCards;
 
     /**
      * 价格
@@ -116,18 +109,16 @@ public class CarBasics extends BaseTransientEntity {
     private BigDecimal sellingPrice;
 
     /**
-     * @return id
+     * 首页图片地址
      */
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "wel_pic")
+    private String welPic;
 
     /**
-     * @param id
+     *   状态
      */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private Integer status;
+
 
     /**
      * 获取品牌
@@ -422,7 +413,7 @@ public class CarBasics extends BaseTransientEntity {
      *
      * @return playing_cards - 首次上牌
      */
-    public Date getPlayingCards() {
+    public String getPlayingCards() {
         return playingCards;
     }
 
@@ -431,36 +422,8 @@ public class CarBasics extends BaseTransientEntity {
      *
      * @param playingCards 首次上牌
      */
-    public void setPlayingCards(Date playingCards) {
+    public void setPlayingCards(String playingCards) {
         this.playingCards = playingCards;
-    }
-
-    /**
-     * @return create_time
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * @return update_time
-     */
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * @param updateTime
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     /**
@@ -479,5 +442,21 @@ public class CarBasics extends BaseTransientEntity {
      */
     public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public String getWelPic() {
+        return welPic;
+    }
+
+    public void setWelPic(String welPic) {
+        this.welPic = welPic;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

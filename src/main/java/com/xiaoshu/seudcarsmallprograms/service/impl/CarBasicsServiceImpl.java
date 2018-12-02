@@ -26,8 +26,11 @@ public class CarBasicsServiceImpl implements CarBasicsService {
     @Transactional
     public CarBasics saveCarBasics(CarBasics carBasics) {
 
-        carBasicsMapper.insertSelective(carBasics);
-
+        if(carBasics.getId() == null) {
+            carBasicsMapper.updateByPrimaryKey(carBasics);
+        } else {
+            carBasicsMapper.insertSelective(carBasics);
+        }
         log.debug("新增CarBasics", carBasics.getId());
         return carBasics;
     }

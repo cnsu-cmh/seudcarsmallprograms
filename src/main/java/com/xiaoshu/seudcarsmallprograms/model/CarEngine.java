@@ -3,13 +3,10 @@ package com.xiaoshu.seudcarsmallprograms.model;
 import javax.persistence.*;
 
 @Table(name = "car_engine")
-public class CarEngine extends BaseTransientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CarEngine extends BaseEntity<Long> {
 
     @Column(name = "car_id")
-    private Integer carId;
+    private Long carId;
 
     /**
      * 发动机型号
@@ -106,30 +103,16 @@ public class CarEngine extends BaseTransientEntity {
     private String envProtection;
 
     /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
      * @return car_id
      */
-    public Integer getCarId() {
+    public Long getCarId() {
         return carId;
     }
 
     /**
      * @param carId
      */
-    public void setCarId(Integer carId) {
+    public void setCarId(Long carId) {
         this.carId = carId;
     }
 

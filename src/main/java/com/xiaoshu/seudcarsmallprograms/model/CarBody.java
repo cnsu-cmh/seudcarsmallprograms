@@ -4,16 +4,13 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "car_body")
-public class CarBody extends BaseTransientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CarBody extends BaseEntity<Long> {
 
     /**
      * car_basics_id
      */
     @Column(name = "car_id")
-    private Integer carId;
+    private Long carId;
 
     /**
      * 宽(mm)
@@ -72,32 +69,13 @@ public class CarBody extends BaseTransientEntity {
     @Column(name = "vehicle_weight")
     private Integer vehicleWeight;
 
-    @Column(name = "create_time")
-    private Date createTime;
-
-    @Column(name = "update_time")
-    private Date updateTime;
-
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * 获取car_basics_id
      *
      * @return car_id - car_basics_id
      */
-    public Integer getCarId() {
+    public Long getCarId() {
         return carId;
     }
 
@@ -106,7 +84,7 @@ public class CarBody extends BaseTransientEntity {
      *
      * @param carId car_basics_id
      */
-    public void setCarId(Integer carId) {
+    public void setCarId(Long carId) {
         this.carId = carId;
     }
 
@@ -290,31 +268,4 @@ public class CarBody extends BaseTransientEntity {
         this.vehicleWeight = vehicleWeight;
     }
 
-    /**
-     * @return create_time
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * @return update_time
-     */
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * @param updateTime
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }
