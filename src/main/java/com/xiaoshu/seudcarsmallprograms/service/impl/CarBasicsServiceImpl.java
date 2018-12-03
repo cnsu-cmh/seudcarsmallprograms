@@ -3,6 +3,13 @@ package com.xiaoshu.seudcarsmallprograms.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaoshu.seudcarsmallprograms.dto.CarSellerDto;
+import com.xiaoshu.seudcarsmallprograms.mapper.CarBodyMapper;
+import com.xiaoshu.seudcarsmallprograms.mapper.CarEngineMapper;
+import com.xiaoshu.seudcarsmallprograms.mapper.SellerInformationMapper;
+import com.xiaoshu.seudcarsmallprograms.model.CarBody;
+import com.xiaoshu.seudcarsmallprograms.model.CarEngine;
+import com.xiaoshu.seudcarsmallprograms.model.SellerInformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,11 +29,21 @@ public class CarBasicsServiceImpl implements CarBasicsService {
     @Autowired
     private CarBasicsMapper carBasicsMapper;
 
+    @Autowired
+    private CarBodyMapper carBodyMapper;
+
+    @Autowired
+    private CarEngineMapper carEngineMapper;
+
+    @Autowired
+    private SellerInformationMapper sellerInformationMapper;
+
+
     @Override
     @Transactional
     public CarBasics saveCarBasics(CarBasics carBasics) {
 
-        if(carBasics.getId() == null) {
+        if(carBasics.getId() != null) {
             carBasicsMapper.updateByPrimaryKey(carBasics);
         } else {
             carBasicsMapper.insertSelective(carBasics);
@@ -67,4 +84,32 @@ public class CarBasicsServiceImpl implements CarBasicsService {
         log.debug("删除CarBasics", id);
     }
 
+    @Override
+    public CarBody selectCarBodyByCarId(Long id) {
+        CarBody carBody = new CarBody(id);
+        return carBodyMapper.selectOne(carBody);
+    }
+
+    @Override
+    public CarEngine selectCarEngineByCarId(Long id) {
+        CarEngine carEngine = new CarEngine(id);
+        return carEngineMapper.selectOne(carEngine);
+    }
+
+    @Override
+    public SellerInformation selectSellerInfoByCarId(Long id) {
+        return sellerInformationMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public CarBasics saveCarBasicsSeller(CarSellerDto carSellerDto) {
+        carBasicsMapper.saveCarBasicsSeller(carSellerDto.getCarId(),carSellerDto.getSellerId());
+        return carBasicsMapper.selectByPrimaryKey(carSellerDto.getCarId());
+    }
+
+    @Override
+    public CarBasics under(Long id) {
+        carBasicsMapper.under(id);
+        return carBasicsMapper.selectByPrimaryKey(id);
+    }
 }

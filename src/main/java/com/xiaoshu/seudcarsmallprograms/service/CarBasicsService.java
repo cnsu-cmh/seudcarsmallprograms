@@ -3,7 +3,11 @@ package com.xiaoshu.seudcarsmallprograms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaoshu.seudcarsmallprograms.dto.CarSellerDto;
 import com.xiaoshu.seudcarsmallprograms.model.CarBasics;
+import com.xiaoshu.seudcarsmallprograms.model.CarBody;
+import com.xiaoshu.seudcarsmallprograms.model.CarEngine;
+import com.xiaoshu.seudcarsmallprograms.model.SellerInformation;
 
 public interface CarBasicsService {
 
@@ -19,4 +23,13 @@ public interface CarBasicsService {
 
     void delete(Long id);
 
+    CarBody selectCarBodyByCarId(Long id);
+
+    CarEngine selectCarEngineByCarId(Long id);
+
+    SellerInformation selectSellerInfoByCarId(Long id);
+
+    CarBasics saveCarBasicsSeller(CarSellerDto carSellerDto);
+
+    CarBasics under(Long id);
 }

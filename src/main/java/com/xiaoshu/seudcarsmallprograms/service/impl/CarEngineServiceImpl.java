@@ -26,7 +26,11 @@ public class CarEngineServiceImpl implements CarEngineService {
     @Transactional
     public CarEngine saveCarEngine(CarEngine carEngine) {
 
-        carEngineMapper.insertSelective(carEngine);
+        if(carEngine.getId() != null) {
+            carEngineMapper.updateByPrimaryKey(carEngine);
+        } else {
+            carEngineMapper.insertSelective(carEngine);
+        }
 
         log.debug("新增CarEngine", carEngine.getId());
         return carEngine;

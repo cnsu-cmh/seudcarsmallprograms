@@ -121,6 +121,12 @@ public class CarBasics extends BaseEntity<Long> {
 
 
     /**
+     * 商家id
+     */
+    @Column(name = "seller_id")
+    private Long sellerId;
+
+    /**
      * 获取品牌
      *
      * @return brand - 品牌
@@ -458,5 +464,13 @@ public class CarBasics extends BaseEntity<Long> {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 }

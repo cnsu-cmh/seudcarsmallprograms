@@ -1,7 +1,8 @@
 package com.xiaoshu.seudcarsmallprograms.controller;
 
-import java.util.List;
 
+import com.xiaoshu.seudcarsmallprograms.dto.CarSellerDto;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,8 @@ import com.xiaoshu.seudcarsmallprograms.model.CarBasics;
 
 import io.swagger.annotations.ApiOperation;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/carBasicss")
 public class CarBasicsController {
@@ -22,6 +25,7 @@ public class CarBasicsController {
 
     @PostMapping
     @ApiOperation(value = "保存")
+    @RequiresPermissions({"car:add"})
     public CarBasics save(@RequestBody CarBasics carBasics) {
         carBasicsService.saveCarBasics(carBasics);
 
@@ -30,12 +34,14 @@ public class CarBasicsController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取")
+    @RequiresPermissions({"car:query"})
     public CarBasics get(@PathVariable Long id) {
         return carBasicsService.getById(id);
     }
 
     @PutMapping
     @ApiOperation(value = "修改")
+    @RequiresPermissions({"car:edit"})
     public CarBasics update(@RequestBody CarBasics carBasics) {
         carBasicsService.updateCarBasics(carBasics);
 
@@ -44,6 +50,7 @@ public class CarBasicsController {
 
     @GetMapping
     @ApiOperation(value = "列表")
+    @RequiresPermissions({"car:query"})
     public PageTableResponse list(PageTableRequest request) {
 
         PageTableHandler.CountHandler countHandler = (r) -> carBasicsService.selectConditionCount(r.getParams());
@@ -57,4 +64,20 @@ public class CarBasicsController {
     public void delete(@PathVariable Long id) {
         carBasicsService.delete(id);
     }
+
+    @PostMapping("/carSeller")
+    @ApiOperation(value = "保存商家信息")
+    @RequiresPermissions({"car:add","car:edit"})
+    public CarBasics save(@RequestBody CarSellerDto carSellerDto) {
+        CarBasics carBasics = carBasicsService.saveCarBasicsSeller(carSellerDto);
+        return carBasics;
+    }
+
+    @PostMapping("/under/{id}")
+    @ApiOperation(value = "根据id获取")
+    @RequiresPermissions({"car:under"})
+    public CarBasics under(@PathVariable Long id) {
+        return carBasicsService.under(id);
+    }
+
 }

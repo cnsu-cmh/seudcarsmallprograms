@@ -17,12 +17,6 @@
             border-radius: 8px
         }
 
-        /*legend {*/
-        /*padding: .5em;*/
-        /*border: 0;*/
-        /*width: auto;*/
-        /*margin-bottom: 6px*/
-        /*}*/
     </style>
 </head>
 <body>
@@ -41,7 +35,7 @@
                                     data-bv-notempty='true' data-bv-notempty-message='品牌 不能为空'
                                     onchange="carTypeChange();">
                                 <option value="">请选择</option>
-                                <option th:each="carBrand:${carBasics}" th:value="${carBrand.name}"
+                                <option th:each="carBrand:${carBrands}" th:value="${carBrand.name}"
                                         th:text="${carBrand.name}" th:data-id="${carBrand.id}"></option>
                             </select>
                             <!--<input class='form-control' placeholder='品牌' type='text' name='brand' id='brand' data-bv-notempty='true' data-bv-notempty-message='brand 不能为空'>-->
@@ -139,7 +133,7 @@
                     <div class='form-group'>
                         <label class='col-md-5 control-label'>变速箱</label>
                         <div class='col-md-7'>
-                            <input class='form-control' placeholder='变速箱' type='text' name='gear-box' id='gear-box'>
+                            <input class='form-control' placeholder='变速箱' type='text' name='gearBox' id='gearBox'>
                         </div>
                     </div>
                 </div>
@@ -242,6 +236,7 @@
             <fieldset>
                 <details id="carBodyDetails">
                     <summary>车身信息</summary>
+                    <input type="hidden" id="id" name="id">
                     <input class='form-control' type='hidden' name='carId' id='carId'>
                     <div class="col-md-4">
                         <div class='form-group'>
@@ -365,6 +360,7 @@
             <fieldset>
                 <details id="carEngineDetails">
                     <summary>发动机</summary>
+                    <input type="hidden" id="id" name="id">
                     <input class='form-control' type='hidden' name='carId' id='carId'>
                     <div class="col-md-4">
                         <div class='form-group'>
@@ -657,6 +653,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+                    var carBodyId = data.id;
+                    $("#carBodyForm #id").val(carBodyId);
                     $("#carBodyDetails").attr("open",false);
                     $("#carEngineDetails").attr("open",true);
                 });
@@ -681,6 +679,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+                    var carEngineId = data.id;
+                    $("#carEngineForm #id").val(carEngineId);
                     $("#carEngineDetails").attr("open",false);
                     $("#carSellerDetails").attr("open",true);
                 });
@@ -700,11 +700,12 @@
             return;
         }
 
+        var formdata = $("#carSellerForm").serializeObject();
         $.ajax({
             type: 'post',
-            url: '/carEngines/carSeller',
+            url: '/carBasicss/carSeller',
             contentType: "application/json; charset=utf-8",
-            data: {"carId":carId,"sellerId":sellerId},
+            data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000});
             }
@@ -743,9 +744,9 @@
         var sellerEl = $('#sellerId').find("option:selected");
         var sellerId = sellerEl.val();
         if(sellerId == '') {
-            $("#sellerName").val();
-            $("#sellerAddress").val();
-            $("#sellerintroduce").text();
+            $("#sellerName").val('');
+            $("#sellerAddress").val('');
+            $("#sellerintroduce").val('');
             return;
         }
         var name = sellerEl.text();

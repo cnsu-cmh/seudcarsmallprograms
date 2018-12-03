@@ -51,6 +51,7 @@
 									<th>变速箱</th>
 									<th>首次上牌</th>
 									<th>价格</th>
+									<th>状态</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -112,17 +113,31 @@ function init(){
 				{"data" : "gear-box", "defaultContent" : ""},
 				{"data" : "playingCards", "defaultContent" : ""},
 				{"data" : "sellingPrice", "defaultContent" : ""},
+                {"data" : "status", "defaultContent" : "",
+					"render": function (data, type, row) {
+                        var _status = row['status'];
+                        if(_status == -1 ) {
+                            return "已下架";
+						} else {
+                            return "在售";
+						}
+					}
+				},
 				{ 
 					"data": "",
 					"defaultContent": "",
 					"orderable":false,
 					"render": function (data, type, row) {
 					   var id = row['id'];
-					   var viewHref = "/pages/carBasics/viewCarBasics?id=" + id;
-					   var editHref = "/pages/carBasics/updateCarBasics?id=" + id;
-					   var view = buttonView(viewHref, "", pers);
-					   var edit = buttonEdit(editHref, "", pers);
-					   var under = buttonUnder(id, "", pers);
+					   var _status = row['status'];
+					   var viewHref = "/pages/carBasicss/viewCarBasics?id=" + id;
+					   var view = buttonView(viewHref,"", pers);
+					   var edit = "",under = "";
+                        if(_status != -1 ) {
+                            var editHref = "/pages/carBasicss/updateCarBasics?id=" + id;
+                            edit = buttonEdit(editHref, "", pers)
+                            under = buttonUnder(id, "", pers);
+                        }
 					   return view + edit + under;
 					}
 				},
@@ -152,7 +167,7 @@ function under(id){
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            type : 'put',
+            type : 'post',
             url : '/carBasicss/under/'+id,
             success : function(data) {
                 example.ajax.reload();

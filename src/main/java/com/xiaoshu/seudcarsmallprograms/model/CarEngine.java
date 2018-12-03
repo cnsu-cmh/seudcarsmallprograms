@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Table(name = "car_engine")
 public class CarEngine extends BaseEntity<Long> {
 
+    private static final long serialVersionUID = 7253718729181172949L;
+
     @Column(name = "car_id")
     private Long carId;
 
@@ -101,6 +103,13 @@ public class CarEngine extends BaseEntity<Long> {
      */
     @Column(name = "env_protection")
     private String envProtection;
+
+    public CarEngine() {
+    }
+
+    public CarEngine(Long carId) {
+        this.carId = carId;
+    }
 
     /**
      * @return car_id

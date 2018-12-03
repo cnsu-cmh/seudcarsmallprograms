@@ -2,6 +2,7 @@ package com.xiaoshu.seudcarsmallprograms.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class CarEngineController {
 
     @PostMapping
     @ApiOperation(value = "保存")
+    @RequiresPermissions({"car:add"})
     public CarEngine save(@RequestBody CarEngine carEngine) {
         carEngineService.saveCarEngine(carEngine);
 
@@ -30,12 +32,14 @@ public class CarEngineController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取")
+    @RequiresPermissions({"car:query"})
     public CarEngine get(@PathVariable Long id) {
         return carEngineService.getById(id);
     }
 
     @PutMapping
     @ApiOperation(value = "修改")
+    @RequiresPermissions({"car:edit"})
     public CarEngine update(@RequestBody CarEngine carEngine) {
         carEngineService.updateCarEngine(carEngine);
 
@@ -44,6 +48,7 @@ public class CarEngineController {
 
     @GetMapping
     @ApiOperation(value = "列表")
+    @RequiresPermissions({"car:query"})
     public PageTableResponse list(PageTableRequest request) {
 
         PageTableHandler.CountHandler countHandler = (r) -> carEngineService.selectConditionCount(r.getParams());

@@ -26,7 +26,11 @@ public class CarBodyServiceImpl implements CarBodyService {
     @Transactional
     public CarBody saveCarBody(CarBody carBody) {
 
-        carBodyMapper.insertSelective(carBody);
+        if(carBody.getId() != null) {
+            carBodyMapper.updateByPrimaryKey(carBody);
+        } else {
+            carBodyMapper.insertSelective(carBody);
+        }
 
         log.debug("新增CarBody", carBody.getId());
         return carBody;

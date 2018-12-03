@@ -1,18 +1,15 @@
 package com.xiaoshu.seudcarsmallprograms.controller;
 
 import com.xiaoshu.seudcarsmallprograms.constants.UserConstants;
-import com.xiaoshu.seudcarsmallprograms.model.SysUser;
-import com.xiaoshu.seudcarsmallprograms.service.DictService;
-import com.xiaoshu.seudcarsmallprograms.service.ImsAutopartsCarBrandService;
-import com.xiaoshu.seudcarsmallprograms.service.SellerInformationService;
-import com.xiaoshu.seudcarsmallprograms.service.impl.DictServiceImpl;
-import com.xiaoshu.seudcarsmallprograms.service.impl.ImsAutopartsCarBrandServiceImpl;
-import com.xiaoshu.seudcarsmallprograms.service.impl.SellerInformationServiceImpl;
+import com.xiaoshu.seudcarsmallprograms.model.*;
+import com.xiaoshu.seudcarsmallprograms.service.*;
+import com.xiaoshu.seudcarsmallprograms.service.impl.*;
 import com.xiaoshu.seudcarsmallprograms.util.SpringUtil;
 import com.xiaoshu.seudcarsmallprograms.util.UserUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -198,17 +195,49 @@ public class PagesController {
         return "carBasics/addCarBasics";
     }
 
-//    /**-----------------carBody-------------------------**/
-//    @RequestMapping("/carBodys/addCarBody")
-//    public String addCarBody(){
-//        return "carBody/addCarBody";
-//    }
-//
-//    /**-----------------carEngine-------------------------**/
-//    @RequestMapping("/carEngines/addCarEngine")
-//    public String addCarEngine(){
-//        return "carEngine/addCarEngine";
-//    }
+    @RequestMapping("/carBasicss/updateCarBasics")
+    public String updateCarBasics(@RequestParam("id") Long id, ModelMap map){
+        ImsAutopartsCarBrandService brandService = SpringUtil.getBean(ImsAutopartsCarBrandServiceImpl.class);
+        DictService dictService = SpringUtil.getBean(DictServiceImpl.class);
+        SellerInformationService sellerService = SpringUtil.getBean(SellerInformationServiceImpl.class);
+        CarBasicsService carBasicsService = SpringUtil.getBean(CarBasicsServiceImpl.class);
+        CarBasics carBasics = carBasicsService.getById(id);
+        CarBody carBody =  carBasicsService.selectCarBodyByCarId(id);
+        carBody = (carBody == null || carBody.getId() == null ) ? new CarBody(id) : carBody;
+        CarEngine carEngine =  carBasicsService.selectCarEngineByCarId(id);
+        carEngine = (carEngine == null || carEngine.getId() == null) ? new CarEngine(id) : carEngine;
+        SellerInformation sellerInfo = new SellerInformation();
+        if(carBasics.getSellerId() != null ) {
+            sellerInfo = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
+        }
+        map.put("carBasics",carBasics);
+        map.put("carBody",carBody);
+        map.put("carEngine",carEngine);
+        map.put("sellerInfo",sellerInfo);
+        map.put("carBrands",brandService.selectAll());
+        map.put("carLevels",dictService.selectByType("carLevel"));
+        map.put("sellers",sellerService.selectAll());
+        return "carBasics/updateCarBasics";
+    }
+
+    @RequestMapping("/carBasicss/viewCarBasics")
+    public String viewCarBasics(@RequestParam("id") Long id, ModelMap map){
+        CarBasicsService carBasicsService = SpringUtil.getBean(CarBasicsServiceImpl.class);
+        CarBasics carBasics = carBasicsService.getById(id);
+        CarBody carBody =  carBasicsService.selectCarBodyByCarId(id);
+        carBody = (carBody == null || carBody.getId() == null ) ? new CarBody(id) : carBody;
+        CarEngine carEngine =  carBasicsService.selectCarEngineByCarId(id);
+        carEngine = (carEngine == null || carEngine.getId() == null) ? new CarEngine(id) : carEngine;
+        SellerInformation sellerInfo = new SellerInformation();
+        if(carBasics.getSellerId() != null ) {
+            sellerInfo = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
+        }
+        map.put("carBasics",carBasics);
+        map.put("carBody",carBody);
+        map.put("carEngine",carEngine);
+        map.put("sellerInfo",sellerInfo);
+        return "carBasics/viewCarBasics";
+    }
 
 
     /**-----------------sellerInformation-------------------------**/

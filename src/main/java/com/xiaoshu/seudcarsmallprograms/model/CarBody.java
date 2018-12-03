@@ -6,11 +6,18 @@ import javax.persistence.*;
 @Table(name = "car_body")
 public class CarBody extends BaseEntity<Long> {
 
+    private static final long serialVersionUID = 527274673863693664L;
+
     /**
      * car_basics_id
      */
     @Column(name = "car_id")
     private Long carId;
+
+    /**
+     * 长(mm)
+     */
+    private Integer length;
 
     /**
      * 宽(mm)
@@ -70,6 +77,13 @@ public class CarBody extends BaseEntity<Long> {
     private Integer vehicleWeight;
 
 
+    public CarBody() {
+    }
+
+    public CarBody(Long carId) {
+        this.carId = carId;
+    }
+
     /**
      * 获取car_basics_id
      *
@@ -86,6 +100,16 @@ public class CarBody extends BaseEntity<Long> {
      */
     public void setCarId(Long carId) {
         this.carId = carId;
+    }
+
+    @Override
+    public Integer getLength() {
+        return length;
+    }
+
+    @Override
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
     /**
