@@ -201,6 +201,7 @@ public class PagesController {
         DictService dictService = SpringUtil.getBean(DictServiceImpl.class);
         SellerInformationService sellerService = SpringUtil.getBean(SellerInformationServiceImpl.class);
         CarBasicsService carBasicsService = SpringUtil.getBean(CarBasicsServiceImpl.class);
+        FileService fileService = SpringUtil.getBean(FileServiceImpl.class);
         CarBasics carBasics = carBasicsService.getById(id);
         CarBody carBody =  carBasicsService.selectCarBodyByCarId(id);
         carBody = (carBody == null || carBody.getId() == null ) ? new CarBody(id) : carBody;
@@ -210,19 +211,23 @@ public class PagesController {
         if(carBasics.getSellerId() != null ) {
             sellerInfo = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
         }
+        List<FileInfo> files = fileService.getByCIdAndCType(id,FileInfo.CType.car);
         map.put("carBasics",carBasics);
         map.put("carBody",carBody);
         map.put("carEngine",carEngine);
         map.put("sellerInfo",sellerInfo);
+        map.put("files",files);
         map.put("carBrands",brandService.selectAll());
         map.put("carLevels",dictService.selectByType("carLevel"));
         map.put("sellers",sellerService.selectAll());
+
         return "carBasics/updateCarBasics";
     }
 
     @RequestMapping("/carBasicss/viewCarBasics")
     public String viewCarBasics(@RequestParam("id") Long id, ModelMap map){
         CarBasicsService carBasicsService = SpringUtil.getBean(CarBasicsServiceImpl.class);
+        FileService fileService = SpringUtil.getBean(FileServiceImpl.class);
         CarBasics carBasics = carBasicsService.getById(id);
         CarBody carBody =  carBasicsService.selectCarBodyByCarId(id);
         carBody = (carBody == null || carBody.getId() == null ) ? new CarBody(id) : carBody;
@@ -232,10 +237,12 @@ public class PagesController {
         if(carBasics.getSellerId() != null ) {
             sellerInfo = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
         }
+        List<FileInfo> files = fileService.getByCIdAndCType(id,FileInfo.CType.car);
         map.put("carBasics",carBasics);
         map.put("carBody",carBody);
         map.put("carEngine",carEngine);
         map.put("sellerInfo",sellerInfo);
+        map.put("files",files);
         return "carBasics/viewCarBasics";
     }
 

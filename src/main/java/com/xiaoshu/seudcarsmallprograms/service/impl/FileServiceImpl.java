@@ -30,7 +30,13 @@ public class FileServiceImpl implements FileService {
 
 
     @Override
-    public FileInfo save(MultipartFile file) throws IOException {
+    public FileInfo save(MultipartFile file) throws IOException{
+        FileInfo fileInfo = multipartFile2FileInfo(file,null,null);
+        log.debug("上传文件{}" );
+        return fileInfo;
+    }
+    @Override
+    public FileInfo multipartFile2FileInfo(MultipartFile file, Long cId, Integer cType)  throws IOException {
         String fileOrigName = file.getOriginalFilename();
         if (!fileOrigName.contains(".")) {
             throw new IllegalArgumentException("缺少后缀名");
@@ -41,6 +47,8 @@ public class FileServiceImpl implements FileService {
         example.createCriteria().andEqualTo("md5", md5);
         FileInfo fileInfo = fileInfoMapper.selectOneByExample(example);
         if (fileInfo != null) {
+            fileInfo.setcType(cType);
+            fileInfo.setcId(cId);
             fileInfoMapper.updateByPrimaryKeySelective(fileInfo);
             return fileInfo;
         }
@@ -60,13 +68,20 @@ public class FileServiceImpl implements FileService {
         fileInfo.setPath(fullPath);
         fileInfo.setUrl(pathname);
         fileInfo.setType(contentType.startsWith("image/") ? 1 : 0);
-
+        fileInfo.setcType(cType);
+        fileInfo.setcId(cId);
         fileInfoMapper.insertSelective(fileInfo);
-
-        log.debug("上传文件{}", fullPath);
-
         return fileInfo;
     }
+
+    @Override
+    public List<FileInfo> getByCIdAndCType(Long cId, Integer cType) {
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setcId(cId);
+        fileInfo.setcType(cType);
+        return fileInfoMapper.select(fileInfo);
+    }
+
 
     @Override
     public Integer selectConditionCount(Map<String, Object> params) {
@@ -97,18 +112,4 @@ public class FileServiceImpl implements FileService {
         return fileInfoMapper.selectByPrimaryKey(id);
     }
 
-    @Override
-    public List<FileInfo> getByCId(Long cId) {
-        FileInfo info = new FileInfo();
-        info.setcId(cId);
-        return fileInfoMapper.select(info);
-    }
-
-    @Override
-    public FileInfo getWelByCId(Long cId) {
-        FileInfo info = new FileInfo();
-        info.setcId(cId);
-        info.setcType(1);
-        return fileInfoMapper.selectOne(info);
-    }
 }

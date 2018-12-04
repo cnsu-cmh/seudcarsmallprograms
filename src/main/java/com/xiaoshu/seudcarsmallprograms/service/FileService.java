@@ -19,7 +19,7 @@ public interface FileService {
 
     FileInfo getById(Long id);
 
-    List<FileInfo> getByCId(Long cId);
+    FileInfo multipartFile2FileInfo(MultipartFile file, Long cId, Integer cType)  throws IOException;
 
-    FileInfo getWelByCId(Long cId);
+    List<FileInfo> getByCIdAndCType(Long cId, Integer cType);
 }

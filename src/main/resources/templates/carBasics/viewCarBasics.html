@@ -1,450 +1,486 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap-select.min.css}">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
-	<style>
-		.col-md-7 {
-			padding-right: 0px;
-		}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
+    <style>
+        .col-md-7 {
+            padding-right: 0px;
+        }
 
-		fieldset {
-			padding: .15em .25em .15em;
-			margin: 0 2px;
-			border: 1px solid silver;
-			border-radius: 8px
-		}
+        fieldset {
+            padding: .15em .25em .15em;
+            margin: 0 2px;
+            border: 1px solid silver;
+            border-radius: 8px
+        }
 
-		legend {
-			padding: .5em;
-			border: 0;
-			width: auto;
-			margin-bottom: 6px
-		}
-	</style>
+        legend {
+            padding: .5em;
+            border: 0;
+            width: auto;
+            margin-bottom: 6px
+        }
+    </style>
 </head>
 <body>
 <div align="center">
-	<button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
+    <button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<fieldset>
-			<legend>基础信息</legend>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>品牌</label>
-						<div class='col-md-7'>
-							[[${carBasics.brand}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>车型</label>
-						<div class='col-md-7'>
-							[[${carBasics.type}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>名称</label>
-						<div class='col-md-7'>
-							[[${carBasics.name}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>厂家指导价（元）</label>
-						<div class='col-md-7'>
-							[[${carBasics.guidancePrice}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>厂商</label>
-						<div class='col-md-7'>
-							[[${carBasics.manufacturer}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>级别</label>
-						<div class='col-md-7'>
-							[[${carBasics.level}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>上市时间</label>
-						<div class='col-md-7'>
-							[[${carBasics.marketTime}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>能源类型</label>
-						<div class='col-md-7'>
-							[[${carBasics.energyType}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>最大功率（kw）</label>
-						<div class='col-md-7'>
-							[[${carBasics.maxPower}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>发动机</label>
-						<div class='col-md-7'>
-							[[${carBasics.engine}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>变速箱</label>
-						<div class='col-md-7'>
-							[[${carBasics.gearBox}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>车身结构</label>
-						<div class='col-md-7'>
-							[[${carBasics.carStructure}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>0~100加速</label>
-						<div class='col-md-7'>
-							[[${carBasics.acceleration}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>耗油</label>
-						<div class='col-md-7'>
-							[[${carBasics.oysterSauce}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>整车质保</label>
-						<div class='col-md-7'>
-							[[${carBasics.guarantee}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>颜色</label>
-						<div class='col-md-7'>
-							[[${carBasics.colour}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>首次上牌</label>
-						<div class='col-md-7'>
-							[[${carBasics.playingCards}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>价格</label>
-						<div class='col-md-7'>
-							[[${carBasics.sellingPrice}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>首页展示图</label>
-						<div class='col-md-7'>
-							<a target='_blank' th:href="|/files${carBasics.welPic}|"><img width='30' th:src="|/files${carBasics.welPic}|"></img></a>
-						</div>
-					</div>
-				</div>
-		</fieldset>
+    <fieldset>
+        <legend>基础信息</legend>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>品牌</label>
+                <div class='col-md-7'>
+                    [[${carBasics.brand}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>车型</label>
+                <div class='col-md-7'>
+                    [[${carBasics.type}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>名称</label>
+                <div class='col-md-7'>
+                    [[${carBasics.name}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>厂家指导价（元）</label>
+                <div class='col-md-7'>
+                    [[${carBasics.guidancePrice}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>厂商</label>
+                <div class='col-md-7'>
+                    [[${carBasics.manufacturer}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>级别</label>
+                <div class='col-md-7'>
+                    [[${carBasics.level}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>上市时间</label>
+                <div class='col-md-7'>
+                    [[${carBasics.marketTime}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>能源类型</label>
+                <div class='col-md-7'>
+                    [[${carBasics.energyType}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>最大功率（kw）</label>
+                <div class='col-md-7'>
+                    [[${carBasics.maxPower}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>发动机</label>
+                <div class='col-md-7'>
+                    [[${carBasics.engine}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>变速箱</label>
+                <div class='col-md-7'>
+                    [[${carBasics.gearBox}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>车身结构</label>
+                <div class='col-md-7'>
+                    [[${carBasics.carStructure}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>0~100加速</label>
+                <div class='col-md-7'>
+                    [[${carBasics.acceleration}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>耗油</label>
+                <div class='col-md-7'>
+                    [[${carBasics.oysterSauce}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>整车质保</label>
+                <div class='col-md-7'>
+                    [[${carBasics.guarantee}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>颜色</label>
+                <div class='col-md-7'>
+                    [[${carBasics.colour}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>首次上牌</label>
+                <div class='col-md-7'>
+                    [[${carBasics.playingCards}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>价格</label>
+                <div class='col-md-7'>
+                    [[${carBasics.sellingPrice}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>首页展示图</label>
+                <div class='col-md-7'>
+                    <a target='_blank' th:href="|/files${carBasics.welPic}|"><img width='30'
+                                                                                  th:src="|/files${carBasics.welPic}|"></img></a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<fieldset>
-		<legend>车身信息</legend>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>长(mm)</label>
-					<div class='col-md-7'>
-						[[${carBody.length}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>宽(mm)</label>
-					<div class='col-md-7'>
-						[[${carBody.width}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>高(mm)</label>
-					<div class='col-md-7'>
-						[[${carBody.height}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>轴距(mm)</label>
-					<div class='col-md-7'>
-						[${carBody.wheelbase}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>前轮距(mm)</label>
-					<div class='col-md-7'>
-						[[${carBody.frontWheelPitch}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>后轮距(mm)</label>
-					<div class='col-md-7'>
-						[[${carBody.rearWheelPitch}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>车门数(个)</label>
-					<div class='col-md-7'>
-						[[${carBody.doorNum}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>座位数(个)</label>
-					<div class='col-md-7'>
-						[[${carBody.seatNum}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>油箱容量(L)</label>
-					<div class='col-md-7'>
-						[[${carBody.tankCapacity}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>行李箱容量(L)</label>
-					<div class='col-md-7'>
-						[[${carBody.trunkCapacity}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class='form-group'>
-					<label class='col-md-5 control-label'>整车质量(KG)</label>
-					<div class='col-md-7'>
-						[[${carBody.vehicleWeight}]]
-					</div>
-				</div>
-			</div>
-	</fieldset>
+    <fieldset>
+        <legend>车身信息</legend>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>长(mm)</label>
+                <div class='col-md-7'>
+                    [[${carBody.length}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>宽(mm)</label>
+                <div class='col-md-7'>
+                    [[${carBody.width}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>高(mm)</label>
+                <div class='col-md-7'>
+                    [[${carBody.height}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>轴距(mm)</label>
+                <div class='col-md-7'>
+                    [${carBody.wheelbase}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>前轮距(mm)</label>
+                <div class='col-md-7'>
+                    [[${carBody.frontWheelPitch}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>后轮距(mm)</label>
+                <div class='col-md-7'>
+                    [[${carBody.rearWheelPitch}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>车门数(个)</label>
+                <div class='col-md-7'>
+                    [[${carBody.doorNum}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>座位数(个)</label>
+                <div class='col-md-7'>
+                    [[${carBody.seatNum}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>油箱容量(L)</label>
+                <div class='col-md-7'>
+                    [[${carBody.tankCapacity}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>行李箱容量(L)</label>
+                <div class='col-md-7'>
+                    [[${carBody.trunkCapacity}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>整车质量(KG)</label>
+                <div class='col-md-7'>
+                    [[${carBody.vehicleWeight}]]
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<fieldset>
-			<legend>发动机</legend>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>发动机型号</label>
-						<div class='col-md-7'>
-							[[${carEngine.type}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>排量（ml）</label>
-						<div class='col-md-7'>
-							[[${carEngine.displacement}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>排量(L)</label>
-						<div class='col-md-7'>
-							[[${carEngine.displacementL}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>进气形式</label>
-						<div class='col-md-7'>
-							[[${carEngine.intakeForm}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>气缸排列形式</label>
-						<div class='col-md-7'>
-							[[${carEngine.cylinderArr}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>气缸个数</label>
-						<div class='col-md-7'>
-							[[${carEngine.cylinderNum}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>每缸气门数</label>
-						<div class='col-md-7'>
-							[[${carEngine.cylinderValve}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>最大马力(Ps)</label>
-						<div class='col-md-7'>
-							[[${carEngine.maxHorsepower}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>最大功率(kw)</label>
-						<div class='col-md-7'>
-							[[${carEngine.maxPower}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>最大功率转速(rpm)</label>
-						<div class='col-md-7'>
-							[[${carEngine.maxPowerSpeed}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>燃料形式</label>
-						<div class='col-md-7'>
-							[[${carEngine.fuelForm}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>燃油标号</label>
-						<div class='col-md-7'>
-							[[${carEngine.fuelGrade}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>供油方式</label>
-						<div class='col-md-7'>
-							[[${carEngine.fuelSupplyMode}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>缸盖材料</label>
-						<div class='col-md-7'>
-							[[${carEngine.cylinderHeadMaterial}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>缸体材料</label>
-						<div class='col-md-7'>
-							[[${carEngine.cylinderBlockMaterial}]]
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>环保标准</label>
-						<div class='col-md-7'>
-							[[${carEngine.envProtection}]]
-						</div>
-					</div>
-				</div>
-		</fieldset>
+    <fieldset>
+        <legend>发动机</legend>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>发动机型号</label>
+                <div class='col-md-7'>
+                    [[${carEngine.type}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>排量（ml）</label>
+                <div class='col-md-7'>
+                    [[${carEngine.displacement}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>排量(L)</label>
+                <div class='col-md-7'>
+                    [[${carEngine.displacementL}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>进气形式</label>
+                <div class='col-md-7'>
+                    [[${carEngine.intakeForm}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>气缸排列形式</label>
+                <div class='col-md-7'>
+                    [[${carEngine.cylinderArr}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>气缸个数</label>
+                <div class='col-md-7'>
+                    [[${carEngine.cylinderNum}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>每缸气门数</label>
+                <div class='col-md-7'>
+                    [[${carEngine.cylinderValve}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>最大马力(Ps)</label>
+                <div class='col-md-7'>
+                    [[${carEngine.maxHorsepower}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>最大功率(kw)</label>
+                <div class='col-md-7'>
+                    [[${carEngine.maxPower}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>最大功率转速(rpm)</label>
+                <div class='col-md-7'>
+                    [[${carEngine.maxPowerSpeed}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>燃料形式</label>
+                <div class='col-md-7'>
+                    [[${carEngine.fuelForm}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>燃油标号</label>
+                <div class='col-md-7'>
+                    [[${carEngine.fuelGrade}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>供油方式</label>
+                <div class='col-md-7'>
+                    [[${carEngine.fuelSupplyMode}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>缸盖材料</label>
+                <div class='col-md-7'>
+                    [[${carEngine.cylinderHeadMaterial}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>缸体材料</label>
+                <div class='col-md-7'>
+                    [[${carEngine.cylinderBlockMaterial}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class='form-group'>
+                <label class='col-md-5 control-label'>环保标准</label>
+                <div class='col-md-7'>
+                    [[${carEngine.envProtection}]]
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<fieldset>
-		<legend>卖家信息</legend>
-			<div class="col-md-6">
-				<div class='form-group'>
-					<label class='col-md-2 control-label'>名称</label>
-					<div class='col-md-10'>
-						[[${sellerInfo.name}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class='form-group'>
-					<label class='col-md-2 control-label'>地址</label>
-					<div class='col-md-10'>
-						[[${sellerInfo.address}]]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class='form-group'>
-					<label class='col-md-2 control-label'>介绍</label>
-					<div class='col-md-10'>
-						[[${sellerInfo.introduceStr}]]
-					</div>
-				</div>
-			</div>
+    <fieldset>
+        <legend>卖家信息</legend>
+        <div class="col-md-6">
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>名称</label>
+                <div class='col-md-10'>
+                    [[${sellerInfo.name}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>地址</label>
+                <div class='col-md-10'>
+                    [[${sellerInfo.address}]]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>介绍</label>
+                <div class='col-md-10'>
+                    [[${sellerInfo.introduceStr}]]
+                </div>
+            </div>
+        </div>
 
-	</fieldset>
+    </fieldset>
 </div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <fieldset>
+        <legend>图片信息</legend>
+        <div class="col-md-12">
+            <div id="carImagesShowDiv" class="layui-carousel" lay-filter="carImagesShowDiv">
+                <div carousel-item="">
+                    <div th:each="file: ${files}">
+                        <a target='_blank' th:href="|/files${file.url}|">
+                            <img th:src="|/files${file.url}|"></img>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+
+<script>
+    layui.use(['carousel'], function() {
+        var carousel = layui.carousel;
+        carousel.render({
+            elem: '#carImagesShowDiv'
+            ,width: '800px'
+            ,height: '400px'
+            ,interval: 5000
+    });
+
+    });
+
+
+</script>
 
 </body>
 </html>

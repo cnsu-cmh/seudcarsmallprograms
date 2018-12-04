@@ -1,592 +1,653 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap-select.min.css}">
-	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
-	<style>
-		.col-md-7 {
-			padding-right: 0px;
-		}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/layui/css/layui.css}">
+    <style>
+        .col-md-7 {
+            padding-right: 0px;
+        }
 
-		fieldset {
-			padding: .15em .25em .15em;
-			margin: 0 2px;
-			border: 1px solid silver;
-			border-radius: 8px
-		}
-	</style>
+        fieldset {
+            padding: .15em .25em .15em;
+            margin: 0 2px;
+            border: 1px solid silver;
+            border-radius: 8px
+        }
+    </style>
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<form class="form-horizontal" onsubmit="return false" id="carBasicsForm">
-		<fieldset>
-			<details id="carBasicsDetails">
-				<summary>基础信息</summary>
-				<div class="col-md-4">
-					<input type="hidden" id="id" name="id" th:value="${carBasics.id}">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>品牌</label>
-						<div class='col-md-7'>
-							<select class="selectpicker show-tick form-control" name='brand' id="brand"
-									data-live-search="true"
-									data-bv-notempty='true' data-bv-notempty-message='品牌 不能为空'
-									onchange="carTypeChange();">
-								<option value="">请选择</option>
-								<option th:each="carBrand:${carBrands}" th:value="${carBrand.name}"
-										th:text="${carBrand.name}" th:data-id="${carBrand.id}" th:selected="${carBrand.name} eq ${carBasics.brand}"></option>
-							</select>
-							<!--<input class='form-control' placeholder='品牌' type='text' name='brand' id='brand' data-bv-notempty='true' data-bv-notempty-message='brand 不能为空'>-->
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>车型</label>
-						<div class='col-md-7'>
-							<select class="selectpicker show-tick form-control" name='type' id="type"
-									data-live-search="true"
-									data-bv-notempty='true' data-bv-notempty-message='车型 不能为空'>
-								<option th:value="${carBasics.type}">[[${carBasics.type}]]</option>
-							</select>
-							<!--<input class='form-control' placeholder='车型' type='text' name='type' id='type' data-bv-notempty='true' data-bv-notempty-message='type 不能为空'>-->
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>名称</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='名称' type='text' name='name' id='name' th:value="${carBasics.name}"
-								   data-bv-notempty='true' data-bv-notempty-message='名称 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>厂家指导价（元）</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='厂家指导价' type='text' name='guidancePrice' th:value="${carBasics.guidancePrice}"
-								   id='guidancePrice'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>厂商</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='厂商' type='text' name='manufacturer' th:value="${carBasics.manufacturer}"
-								   id='manufacturer'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>级别</label>
-						<div class='col-md-7'>
-							<select class="selectpicker show-tick form-control" name='level' id="level">
-								<option value="">请选择</option>
-								<option th:each="carLevel:${carLevels}" th:value="${carLevel.val}"
-										th:text="${carLevel.val}" th:selected="${carLevel.val} eq ${carBasics.level}"></option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>上市时间</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='上市时间' type='text' name='marketTime' id='marketTime' th:value="${carBasics.marketTime}"
-								   data-bv-notempty='true' data-bv-notempty-message='marketTime 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>能源类型</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='能源类型' type='text' name='energyType' id='energyType' th:value="${carBasics.energyType}"
-								   data-bv-notempty='true' data-bv-notempty-message='energyType 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>最大功率（kw）</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='最大功率' type='text' name='maxPower' id='maxPower' th:value="${carBasics.maxPower}">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>发动机</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='发动机' type='text' name='engine' id='engine' th:value="${carBasics.engine}"
-								   data-bv-notempty='true' data-bv-notempty-message='engine 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>变速箱</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='变速箱' type='text' name='gearBox' id='gearBox' th:value="${carBasics.gearBox}">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>车身结构</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='车身结构' type='text' name='carStructure' th:value="${carBasics.carStructure}"
-								   id='carStructure'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>0~100加速</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='0~100加速' type='text' name='acceleration' th:value="${carBasics.acceleration}"
-								   id='acceleration'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>耗油</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='耗油' type='text' name='oysterSauce' th:value="${carBasics.oysterSauce}"
-								   id='oysterSauce'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>整车质保</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='整车质保' type='text' name='guarantee' id='guarantee' th:value="${carBasics.guarantee}">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>颜色</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='颜色' type='text' name='colour' id='colour' th:value="${carBasics.colour}">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>首次上牌</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='首次上牌' type='text' name='playingCards' th:value="${carBasics.playingCards}"
-								   id='playingCards'
-								   data-bv-notempty='true' data-bv-notempty-message='playingCards 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>价格</label>
-						<div class='col-md-7'>
-							<input class='form-control' placeholder='价格' type='text' name='sellingPrice' th:value="${carBasics.sellingPrice}"
-								   id='sellingPrice'
-								   data-bv-notempty='true' data-bv-notempty-message='sellingPrice 不能为空'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class='form-group'>
-						<label class='col-md-5 control-label'>首页展示图</label>
-						<div class='col-md-7'>
-							<button type="button" class="layui-btn" id="welPicUploadBtn"><i
-									class="layui-icon">&#xe67c;</i>上传图片
-							</button>
-							<input type='hidden' name='welPic' id='welPic'>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div id="welPicDiv"><a target='_blank' th:href="|/files${carBasics.welPic}|"><img width='30' th:src="|/files${carBasics.welPic}|"></img></a></div>
-				</div>
+    <form class="form-horizontal" onsubmit="return false" id="carBasicsForm">
+        <fieldset>
+            <details id="carBasicsDetails">
+                <summary>基础信息</summary>
+                <div class="col-md-4">
+                    <input type="hidden" id="id" name="id" th:value="${carBasics.id}">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>品牌</label>
+                        <div class='col-md-7'>
+                            <select class="selectpicker show-tick form-control" name='brand' id="brand"
+                                    data-live-search="true"
+                                    data-bv-notempty='true' data-bv-notempty-message='品牌 不能为空'
+                                    onchange="carTypeChange();">
+                                <option value="">请选择</option>
+                                <option th:each="carBrand:${carBrands}" th:value="${carBrand.name}"
+                                        th:text="${carBrand.name}" th:data-id="${carBrand.id}"
+                                        th:selected="${carBrand.name} eq ${carBasics.brand}"></option>
+                            </select>
+                            <!--<input class='form-control' placeholder='品牌' type='text' name='brand' id='brand' data-bv-notempty='true' data-bv-notempty-message='brand 不能为空'>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>车型</label>
+                        <div class='col-md-7'>
+                            <select class="selectpicker show-tick form-control" name='type' id="type"
+                                    data-live-search="true"
+                                    data-bv-notempty='true' data-bv-notempty-message='车型 不能为空'>
+                                <option th:value="${carBasics.type}">[[${carBasics.type}]]</option>
+                            </select>
+                            <!--<input class='form-control' placeholder='车型' type='text' name='type' id='type' data-bv-notempty='true' data-bv-notempty-message='type 不能为空'>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>名称</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='名称' type='text' name='name' id='name'
+                                   th:value="${carBasics.name}"
+                                   data-bv-notempty='true' data-bv-notempty-message='名称 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>厂家指导价（元）</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='厂家指导价' type='text' name='guidancePrice'
+                                   th:value="${carBasics.guidancePrice}"
+                                   id='guidancePrice'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>厂商</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='厂商' type='text' name='manufacturer'
+                                   th:value="${carBasics.manufacturer}"
+                                   id='manufacturer'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>级别</label>
+                        <div class='col-md-7'>
+                            <select class="selectpicker show-tick form-control" name='level' id="level">
+                                <option value="">请选择</option>
+                                <option th:each="carLevel:${carLevels}" th:value="${carLevel.val}"
+                                        th:text="${carLevel.val}"
+                                        th:selected="${carLevel.val} eq ${carBasics.level}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>上市时间</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='上市时间' type='text' name='marketTime' id='marketTime'
+                                   th:value="${carBasics.marketTime}"
+                                   data-bv-notempty='true' data-bv-notempty-message='marketTime 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>能源类型</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='能源类型' type='text' name='energyType' id='energyType'
+                                   th:value="${carBasics.energyType}"
+                                   data-bv-notempty='true' data-bv-notempty-message='energyType 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>最大功率（kw）</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='最大功率' type='text' name='maxPower' id='maxPower'
+                                   th:value="${carBasics.maxPower}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>发动机</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='发动机' type='text' name='engine' id='engine'
+                                   th:value="${carBasics.engine}"
+                                   data-bv-notempty='true' data-bv-notempty-message='engine 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>变速箱</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='变速箱' type='text' name='gearBox' id='gearBox'
+                                   th:value="${carBasics.gearBox}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>车身结构</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='车身结构' type='text' name='carStructure'
+                                   th:value="${carBasics.carStructure}"
+                                   id='carStructure'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>0~100加速</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='0~100加速' type='text' name='acceleration'
+                                   th:value="${carBasics.acceleration}"
+                                   id='acceleration'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>耗油</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='耗油' type='text' name='oysterSauce'
+                                   th:value="${carBasics.oysterSauce}"
+                                   id='oysterSauce'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>整车质保</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='整车质保' type='text' name='guarantee' id='guarantee'
+                                   th:value="${carBasics.guarantee}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>颜色</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='颜色' type='text' name='colour' id='colour'
+                                   th:value="${carBasics.colour}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>首次上牌</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='首次上牌' type='text' name='playingCards'
+                                   th:value="${carBasics.playingCards}"
+                                   id='playingCards'
+                                   data-bv-notempty='true' data-bv-notempty-message='playingCards 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>价格</label>
+                        <div class='col-md-7'>
+                            <input class='form-control' placeholder='价格' type='text' name='sellingPrice'
+                                   th:value="${carBasics.sellingPrice}"
+                                   id='sellingPrice'
+                                   data-bv-notempty='true' data-bv-notempty-message='sellingPrice 不能为空'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label class='col-md-5 control-label'>首页展示图</label>
+                        <div class='col-md-7'>
+                            <button type="button" class="layui-btn" id="welPicUploadBtn"><i
+                                    class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
+                            <input type='hidden' name='welPic' id='welPic'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="welPicDiv"><a target='_blank' th:href="|/files${carBasics.welPic}|"><img width='50'
+                                                                                                      th:src="|/files${carBasics.welPic}|"></img></a>
+                    </div>
+                </div>
 
-				<div class="form-actions">
-					<div class="row" align="center">
-						<div class="col-md-12">
-							<button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
-							<button class="btn btn-primary" type="submit" onclick="updateCarBasics()">
-								<i class="fa fa-save"></i> 保存
-							</button>
-						</div>
-					</div>
-				</div>
-			</details>
-		</fieldset>
-	</form>
+                <div class="form-actions">
+                    <div class="row" align="center">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
+                            <button class="btn btn-primary" type="submit" onclick="updateCarBasics()">
+                                <i class="fa fa-save"></i> 保存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </fieldset>
+    </form>
 </div>
 
 <div id="carBodyDiv">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<form class="form-horizontal" onsubmit="return false" id="carBodyForm">
-			<fieldset>
-				<details id="carBodyDetails">
-					<summary>车身信息</summary>
-					<input type="hidden" id="id" name="id" th:value="${carBody.id}">
-					<input class='form-control' type='hidden' name='carId' id='carId' th:value="${carBody.carId}">
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>长(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='长' type='text' name='length' id='length' th:value="${carBody.length}"
-									   data-bv-notempty='true' data-bv-notempty-message='长不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>宽(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='宽' type='text' name='width' id='width' th:value="${carBody.width}"
-									   data-bv-notempty='true' data-bv-notempty-message='宽不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>高(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='height' type='高' name='height' id='height' th:value="${carBody.height}"
-									   data-bv-notempty='true' data-bv-notempty-message='高不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>轴距(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='轴距' type='text' name='wheelbase' th:value="${carBody.wheelbase}"
-									   id='wheelbase'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>前轮距(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='前轮距' type='text' name='frontWheelPitch' th:value="${carBody.frontWheelPitch}"
-									   id='frontWheelPitch'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>后轮距(mm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='后轮距' type='text' name='rearWheelPitch' th:value="${carBody.rearWheelPitch}"
-									   id='rearWheelPitch'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>车门数(个)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='车门数' type='text' name='doorNum' id='doorNum' th:value="${carBody.doorNum}"
-									   data-bv-notempty='true' data-bv-notempty-message='车门数不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>座位数(个)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='座位数' type='text' name='seatNum' id='seatNum' th:value="${carBody.seatNum}"
-									   data-bv-notempty='true' data-bv-notempty-message='座位数不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>油箱容量(L)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='油箱容量' type='text' name='tankCapacity' th:value="${carBody.tankCapacity}"
-									   id='tankCapacity' data-bv-notempty='true' data-bv-notempty-message='油箱容量不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>行李箱容量(L)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='行李箱容量' type='text' name='trunkCapacity' th:value="${carBody.trunkCapacity}"
-									   id='trunkCapacity'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>整车质量(KG)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='整车质量' type='text' name='vehicleWeight'  th:value="${carBody.vehicleWeight}"
-									   id='vehicleWeight' data-bv-notempty='true' data-bv-notempty-message='整车质量不能为空'>
-							</div>
-						</div>
-					</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" onsubmit="return false" id="carBodyForm">
+            <fieldset>
+                <details id="carBodyDetails">
+                    <summary>车身信息</summary>
+                    <input type="hidden" id="id" name="id" th:value="${carBody.id}">
+                    <input class='form-control' type='hidden' name='carId' id='carId' th:value="${carBody.carId}">
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>长(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='长' type='text' name='length' id='length'
+                                       th:value="${carBody.length}"
+                                       data-bv-notempty='true' data-bv-notempty-message='长不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>宽(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='宽' type='text' name='width' id='width'
+                                       th:value="${carBody.width}"
+                                       data-bv-notempty='true' data-bv-notempty-message='宽不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>高(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='height' type='高' name='height' id='height'
+                                       th:value="${carBody.height}"
+                                       data-bv-notempty='true' data-bv-notempty-message='高不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>轴距(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='轴距' type='text' name='wheelbase'
+                                       th:value="${carBody.wheelbase}"
+                                       id='wheelbase'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>前轮距(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='前轮距' type='text' name='frontWheelPitch'
+                                       th:value="${carBody.frontWheelPitch}"
+                                       id='frontWheelPitch'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>后轮距(mm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='后轮距' type='text' name='rearWheelPitch'
+                                       th:value="${carBody.rearWheelPitch}"
+                                       id='rearWheelPitch'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>车门数(个)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='车门数' type='text' name='doorNum' id='doorNum'
+                                       th:value="${carBody.doorNum}"
+                                       data-bv-notempty='true' data-bv-notempty-message='车门数不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>座位数(个)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='座位数' type='text' name='seatNum' id='seatNum'
+                                       th:value="${carBody.seatNum}"
+                                       data-bv-notempty='true' data-bv-notempty-message='座位数不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>油箱容量(L)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='油箱容量' type='text' name='tankCapacity'
+                                       th:value="${carBody.tankCapacity}"
+                                       id='tankCapacity' data-bv-notempty='true' data-bv-notempty-message='油箱容量不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>行李箱容量(L)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='行李箱容量' type='text' name='trunkCapacity'
+                                       th:value="${carBody.trunkCapacity}"
+                                       id='trunkCapacity'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>整车质量(KG)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='整车质量' type='text' name='vehicleWeight'
+                                       th:value="${carBody.vehicleWeight}"
+                                       id='vehicleWeight' data-bv-notempty='true' data-bv-notempty-message='整车质量不能为空'>
+                            </div>
+                        </div>
+                    </div>
 
-					<div class="form-actions">
-						<div class="row" align="center">
-							<div class="col-md-12">
-								<button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
-								<button class="btn btn-primary" type="submit" onclick="updateCarBody()">
-									<i class="fa fa-save"></i> 保存
-								</button>
-							</div>
-						</div>
-					</div>
-				</details>
-			</fieldset>
-		</form>
-	</div>
+                    <div class="form-actions">
+                        <div class="row" align="center">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
+                                <button class="btn btn-primary" type="submit" onclick="updateCarBody()">
+                                    <i class="fa fa-save"></i> 保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </fieldset>
+        </form>
+    </div>
 </div>
 
 <div id="carEngineDiv">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<form class="form-horizontal" onsubmit="return false" id="carEngineForm">
-			<fieldset>
-				<details id="carEngineDetails">
-					<summary>发动机</summary>
-					<input type="hidden" id="id" name="id" th:value="${carEngine.id}">
-					<input class='form-control' type='hidden' name='carId' id='carId' th:value="${carEngine.carId}">
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>发动机型号</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='发动机型号' type='text' name='type' id='type' th:value="${carEngine.type}"
-									   data-bv-notempty='true' data-bv-notempty-message='发动机型号不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>排量（ml）</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='排量' type='text' name='displacement' th:value="${carEngine.displacement}"
-									   id='displacement' data-bv-notempty='true' data-bv-notempty-message='排量不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>排量(L)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='排量L' type='text' name='displacementL' th:value="${carEngine.displacementL}"
-									   id='displacementL' data-bv-notempty='true' data-bv-notempty-message='排量L不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>进气形式</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='进气形式' type='text' name='intakeForm' th:value="${carEngine.intakeForm}"
-									   id='intakeForm'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>气缸排列形式</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='气缸排列形式' type='text' name='cylinderArr'  th:value="${carEngine.cylinderArr}"
-									   id='cylinderArr'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>气缸个数</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='气缸个数' type='text' name='cylinderNum' th:value="${carEngine.cylinderNum}"
-									   id='cylinderNum'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>每缸气门数</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='每缸气门数' type='text' name='cylinderValve' th:value="${carEngine.cylinderValve}"
-									   id='cylinderValve'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>最大马力(Ps)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='最大马力' type='text' name='maxHorsepower' th:value="${carEngine.maxHorsepower}"
-									   id='maxHorsepower'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>最大功率(kw)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='最大功率' type='text' name='maxPower' th:value="${carEngine.maxPower}"
-									   id='maxPower'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>最大功率转速(rpm)</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='最大功率转速' type='text' name='maxPowerSpeed' th:value="${carEngine.maxPowerSpeed}"
-									   id='maxPowerSpeed'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>燃料形式</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='燃料形式' type='text' name='fuelForm' id='fuelForm' th:value="${carEngine.fuelForm}"
-									   data-bv-notempty='true' data-bv-notempty-message='燃料形式不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>燃油标号</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='燃油标号' type='text' name='fuelGrade' th:value="${carEngine.fuelGrade}"
-									   id='fuelGrade'
-									   data-bv-notempty='true' data-bv-notempty-message='燃油标号不能为空'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>供油方式</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='供油方式' type='text' name='fuelSupplyMode' th:value="${carEngine.fuelSupplyMode}"
-									   id='fuelSupplyMode'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>缸盖材料</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='缸盖材料' type='text' th:value="${carEngine.cylinderHeadMaterial}"
-									   name='cylinderHeadMaterial' id='cylinderHeadMaterial'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>缸体材料</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='缸体材料' type='text' th:value="${carEngine.cylinderBlockMaterial}"
-									   name='cylinderBlockMaterial' id='cylinderBlockMaterial'>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class='form-group'>
-							<label class='col-md-5 control-label'>环保标准</label>
-							<div class='col-md-7'>
-								<input class='form-control' placeholder='环保标准' type='text' name='envProtection' th:value="${carEngine.envProtection}"
-									   id='envProtection'>
-							</div>
-						</div>
-					</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" onsubmit="return false" id="carEngineForm">
+            <fieldset>
+                <details id="carEngineDetails">
+                    <summary>发动机</summary>
+                    <input type="hidden" id="id" name="id" th:value="${carEngine.id}">
+                    <input class='form-control' type='hidden' name='carId' id='carId' th:value="${carEngine.carId}">
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>发动机型号</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='发动机型号' type='text' name='type' id='type'
+                                       th:value="${carEngine.type}"
+                                       data-bv-notempty='true' data-bv-notempty-message='发动机型号不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>排量（ml）</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='排量' type='text' name='displacement'
+                                       th:value="${carEngine.displacement}"
+                                       id='displacement' data-bv-notempty='true' data-bv-notempty-message='排量不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>排量(L)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='排量L' type='text' name='displacementL'
+                                       th:value="${carEngine.displacementL}"
+                                       id='displacementL' data-bv-notempty='true' data-bv-notempty-message='排量L不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>进气形式</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='进气形式' type='text' name='intakeForm'
+                                       th:value="${carEngine.intakeForm}"
+                                       id='intakeForm'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>气缸排列形式</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='气缸排列形式' type='text' name='cylinderArr'
+                                       th:value="${carEngine.cylinderArr}"
+                                       id='cylinderArr'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>气缸个数</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='气缸个数' type='text' name='cylinderNum'
+                                       th:value="${carEngine.cylinderNum}"
+                                       id='cylinderNum'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>每缸气门数</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='每缸气门数' type='text' name='cylinderValve'
+                                       th:value="${carEngine.cylinderValve}"
+                                       id='cylinderValve'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>最大马力(Ps)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='最大马力' type='text' name='maxHorsepower'
+                                       th:value="${carEngine.maxHorsepower}"
+                                       id='maxHorsepower'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>最大功率(kw)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='最大功率' type='text' name='maxPower'
+                                       th:value="${carEngine.maxPower}"
+                                       id='maxPower'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>最大功率转速(rpm)</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='最大功率转速' type='text' name='maxPowerSpeed'
+                                       th:value="${carEngine.maxPowerSpeed}"
+                                       id='maxPowerSpeed'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>燃料形式</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='燃料形式' type='text' name='fuelForm' id='fuelForm'
+                                       th:value="${carEngine.fuelForm}"
+                                       data-bv-notempty='true' data-bv-notempty-message='燃料形式不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>燃油标号</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='燃油标号' type='text' name='fuelGrade'
+                                       th:value="${carEngine.fuelGrade}"
+                                       id='fuelGrade'
+                                       data-bv-notempty='true' data-bv-notempty-message='燃油标号不能为空'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>供油方式</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='供油方式' type='text' name='fuelSupplyMode'
+                                       th:value="${carEngine.fuelSupplyMode}"
+                                       id='fuelSupplyMode'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>缸盖材料</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='缸盖材料' type='text'
+                                       th:value="${carEngine.cylinderHeadMaterial}"
+                                       name='cylinderHeadMaterial' id='cylinderHeadMaterial'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>缸体材料</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='缸体材料' type='text'
+                                       th:value="${carEngine.cylinderBlockMaterial}"
+                                       name='cylinderBlockMaterial' id='cylinderBlockMaterial'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class='form-group'>
+                            <label class='col-md-5 control-label'>环保标准</label>
+                            <div class='col-md-7'>
+                                <input class='form-control' placeholder='环保标准' type='text' name='envProtection'
+                                       th:value="${carEngine.envProtection}"
+                                       id='envProtection'>
+                            </div>
+                        </div>
+                    </div>
 
-					<div class="form-actions">
-						<div class="row" align="center">
-							<div class="col-md-12">
-								<button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
-								<button class="btn btn-primary" type="submit" onclick="updateCarEngine()">
-									<i class="fa fa-save"></i> 保存
-								</button>
-							</div>
-						</div>
-					</div>
-				</details>
-			</fieldset>
-		</form>
-	</div>
+                    <div class="form-actions">
+                        <div class="row" align="center">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
+                                <button class="btn btn-primary" type="submit" onclick="updateCarEngine()">
+                                    <i class="fa fa-save"></i> 保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </fieldset>
+        </form>
+    </div>
 </div>
 
 <div id="carSellerDiv">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<form class="form-horizontal" onsubmit="return false" id="carSellerForm">
-			<fieldset>
-				<details id="carSellerDetails">
-					<summary>卖家信息</summary>
-					<input class='form-control' type='hidden' name='carId' id='carId' th:value="${carBasics.id}">
-					<div class='form-group'>
-						<label class='col-md-2 control-label'>搜索补全卖家信息</label>
-						<div class='col-md-10'>
-							<select class="selectpicker show-tick form-control" id="sellerId" name="sellerId" onchange="changeSeller()">
-								<option value="">请选择</option>
-								<option th:each="seller:${sellers}" th:value="${seller.id}" th:text="${seller.name}"
-										th:data-address="${seller.address}" th:data-introduce="${seller.introduceStr}" th:selected="${sellerInfo.name} eq ${seller.name}"></option>
-							</select>
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-md-2 control-label'>名称</label>
-						<div class='col-md-10'>
-							<input class='form-control' placeholder='名称' type='text'id="sellerName" disabled th:value="${sellerInfo.name}">
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-md-2 control-label'>地址</label>
-						<div class='col-md-10'>
-							<input class='form-control' placeholder='地址' type='text' id='sellerAddress' disabled th:value="${sellerInfo.address}">
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-md-2 control-label'>介绍</label>
-						<div class='col-md-10'>
-							<textarea class='form-control' placeholder='介绍' rows="10"  type='text' id='sellerintroduce' disabled th:text="${sellerInfo.introduceStr}"></textarea>
-						</div>
-					</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" onsubmit="return false" id="carSellerForm">
+            <fieldset>
+                <details id="carSellerDetails">
+                    <summary>卖家信息</summary>
+                    <input class='form-control' type='hidden' name='carId' id='carId' th:value="${carBasics.id}">
+                    <div class='form-group'>
+                        <label class='col-md-2 control-label'>搜索补全卖家信息</label>
+                        <div class='col-md-10'>
+                            <select class="selectpicker show-tick form-control" id="sellerId" name="sellerId"
+                                    onchange="changeSeller()">
+                                <option value="">请选择</option>
+                                <option th:each="seller:${sellers}" th:value="${seller.id}" th:text="${seller.name}"
+                                        th:data-address="${seller.address}" th:data-introduce="${seller.introduceStr}"
+                                        th:selected="${sellerInfo.name} eq ${seller.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-md-2 control-label'>名称</label>
+                        <div class='col-md-10'>
+                            <input class='form-control' placeholder='名称' type='text' id="sellerName" disabled
+                                   th:value="${sellerInfo.name}">
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-md-2 control-label'>地址</label>
+                        <div class='col-md-10'>
+                            <input class='form-control' placeholder='地址' type='text' id='sellerAddress' disabled
+                                   th:value="${sellerInfo.address}">
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-md-2 control-label'>介绍</label>
+                        <div class='col-md-10'>
+                            <textarea class='form-control' placeholder='介绍' rows="10" type='text' id='sellerintroduce'
+                                      disabled th:text="${sellerInfo.introduceStr}"></textarea>
+                        </div>
+                    </div>
 
-					<div class="form-actions">
-						<div class="row" align="center">
-							<div class="col-md-12">
-								<button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
-								<button class="btn btn-primary" type="submit" onclick="updateCarSeller()">
-									<i class="fa fa-save"></i> 保存
-								</button>
-							</div>
-						</div>
-					</div>
-				</details>
-			</fieldset>
-		</form>
-	</div>
+                    <div class="form-actions">
+                        <div class="row" align="center">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" onclick="location.href='carBasicsList'">返回</button>
+                                <button class="btn btn-primary" type="submit" onclick="updateCarSeller()">
+                                    <i class="fa fa-save"></i> 保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </fieldset>
+        </form>
+    </div>
 </div>
 
 <div id="carImagesDiv">
-	<fieldset>
-		<details id="carImagesDetails">
-			<summary>图片信息</summary>
-			<button type="button" class="layui-btn" id="carImagesUploadBtn">
-				<i class="layui-icon">&#xe67c;</i>上传图片
-			</button>
-			<div class="col-md-12">
-				<div id="carImagesShowDiv"></div>
-			</div>
-		</details>
-	</fieldset>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <fieldset>
+            <details id="carImagesDetails">
+                <summary>图片信息</summary>
+                <button type="button" class="layui-btn" id="carImagesUploadBtn">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+                <div class="col-md-12">
+                    <div id="carImagesShowDiv">
+                        <div th:each="file: ${files}" th:id="|image_${file.id}|" class='col-md-2'>
+                            <a target='_blank'  th:href="|/files${file.url}|">
+                                <img width='50' th:src="|/files${file.url}|"></img>
+                            </a>
+                            <button class='layui-btn layui-btn-xs' th:title='删除' th:onclick='|delImage(${file.id})|'>
+                                <i class='layui-icon'>&#xe640;删除</i></button>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </fieldset>
+    </div>
 </div>
 
 <script type="text/javascript" th:src="@{/static/js/libs/jquery-2.1.1.min.js}"></script>
@@ -601,6 +662,8 @@
     var host = window.location.host;
     var domain = pro + "//" + host;
     var layer;
+    var carId = $("#carBasicsForm #id").val();
+    console.info(carId);
     layui.use(['layer', 'laydate', 'upload'], function () {
         layer = layui.layer;
         var upload = layui.upload;
@@ -612,7 +675,7 @@
                 var url = res.url;
                 $("#welPic").val(url);
                 var src = domain + "/files" + url;
-                var a = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "'></img></a>";
+                var a = "<a target='_blank' href='" + src + "'><img width='50' src='" + src + "'></img></a>";
                 $("#welPicDiv").html(a);
                 layer.msg("上传成功");
             }
@@ -621,16 +684,33 @@
         upload.render({
             elem: '#carImagesUploadBtn'
             , accept: 'images'
-            , url: '/files'
+            , url: '/carBasicss/' + carId + '/uploadImages'
             , multiple: true
             , done: function (res, index, upload) {
+                if (res.url == undefined || !res.url || res.url == '') {
+                    return;
+                }
                 var url = res.url;
                 var src = domain + "/files" + url;
-                var a = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "'></img></a>";
-                $("#carImagesShowDiv").append(a);
+                var a = "<a target='_blank' href='" + src + "'><img width='50' src='" + src + "'></img></a>";
+                var btn = "<button class='layui-btn layui-btn-xs' title='删除' onclick='delImage("+res.id+")'> <i class='layui-icon'>&#xe640;删除</i></button>";
+                var div = "<div id='image_"+res.id+"' class='col-md-2'> " + a + btn + "</div>"
+                $("#carImagesShowDiv").append(div);
             },
-            allDone: function(obj){
-                layer.msg("上传成功");
+            allDone: function (obj) {
+                if (carId != '') {
+                    layer.msg("上传成功");
+                }
+            },
+            error: function (index, upload) {
+                if (carId == '') {
+                    layer.msg("请先完善基础信息");
+                    return;
+                } else {
+                    layer.msg("服务器错误");
+                    return;
+                }
+                ;
             }
         });
     });
@@ -652,8 +732,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("修改成功", {shift: -1, time: 1000}, function () {
-                    $("#carBasicsDetails").attr("open",false);
-                    $("#carBodyDetails").attr("open",true);
+                    $("#carBasicsDetails").attr("open", false);
+                    $("#carBodyDetails").attr("open", true);
                 });
             }
         });
@@ -676,8 +756,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("修改成功", {shift: -1, time: 1000}, function () {
-                    $("#carBodyDetails").attr("open",false);
-                    $("#carEngineDetails").attr("open",true);
+                    $("#carBodyDetails").attr("open", false);
+                    $("#carEngineDetails").attr("open", true);
                 });
             }
         });
@@ -700,8 +780,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("修改成功", {shift: -1, time: 1000}, function () {
-                    $("#carEngineDetails").attr("open",false);
-                    $("#carSellerDetails").attr("open",true);
+                    $("#carEngineDetails").attr("open", false);
+                    $("#carSellerDetails").attr("open", true);
                 });
             }
         });
@@ -710,11 +790,11 @@
     function updateCarSeller() {
         var carId = $("#carSellerForm #carId").val();
         var sellerId = $("#carSellerForm #sellerId").val();
-        if(carId == '') {
+        if (carId == '') {
             layer.msg("请先完善基础信息");
             return;
         }
-        if(sellerId == '') {
+        if (sellerId == '') {
             layer.msg("请先选择卖家信息");
             return;
         }
@@ -730,6 +810,23 @@
             }
         })
 
+    }
+
+    function delImage(id){
+        layer.confirm('确定要删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                type : 'delete',
+                url : '/files/'+id,
+                success : function(data) {
+                    $("#image_"+id).remove();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
     }
 
 </script>
@@ -763,7 +860,7 @@
         debugger;
         var sellerEl = $('#sellerId').find("option:selected");
         var sellerId = sellerEl.val();
-        if(sellerId == '') {
+        if (sellerId == '') {
             $("#sellerName").val('');
             $("#sellerAddress").val('');
             $("#sellerintroduce").val('');
@@ -779,7 +876,7 @@
 
     $(function () {
         $('#brand').selectpicker();
-        $("#carBasicsDetails").attr("open",true);
+        $("#carBasicsDetails").attr("open", true);
     });
 </script>
 </body>

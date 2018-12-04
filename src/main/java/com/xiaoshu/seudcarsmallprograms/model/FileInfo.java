@@ -79,7 +79,7 @@ public class FileInfo extends BaseEntity<Long> {
 		this.cType = cType;
 	}
 
-	public interface CarType{
+	public interface CType{
 		int car = 1;
 	}
 }

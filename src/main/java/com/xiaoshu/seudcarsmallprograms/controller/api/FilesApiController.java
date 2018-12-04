@@ -24,15 +24,4 @@ public class FilesApiController extends ApiController{
         return fileService.getById(id);
     }
 
-    @GetMapping("/files/{cId}")
-    @ApiOperation(value = "根据车子id获取车子图片集合")
-    public List<FileInfo> getByCId(@PathVariable Long cId) {
-        return fileService.getByCId(cId);
-    }
-
-    @GetMapping("/files/wel/{cId}")
-    @ApiOperation(value = "根据车子id获取首页展示图片")
-    public FileInfo getWelByCId(@PathVariable Long cId) {
-        return fileService.getWelByCId(cId);
-    }
 }

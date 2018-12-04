@@ -91,9 +91,12 @@ public class CarBasicsController {
 
 
     @LogAnnotation(module = "图片上传")
-    @PostMapping("/uploadImages/{carId}")
-    public FileInfo uploadFile(MultipartFile file, Long carId) throws IOException {
-        FileInfo fileInfo = fileService.save(file);
+    @PostMapping("/{carId}/uploadImages")
+    public FileInfo uploadFile(MultipartFile file, @PathVariable Long carId) throws IOException {
+        if(carId == null ) {
+            return null;
+        }
+        FileInfo fileInfo = fileService.multipartFile2FileInfo(file,carId,FileInfo.CType.car);
         return fileInfo;
     }
 

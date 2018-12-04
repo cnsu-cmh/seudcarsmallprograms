@@ -187,7 +187,8 @@ layui.use('upload', function(){
     var upload = layui.upload;
     upload.render({
         elem: '#importCarBtn'
-        ,exts: 'xls,xlsx'
+		,accept: 'file'
+        ,exts: 'xls|xlsx'
         ,url: '/carBasicss/import'
         ,done: function(res, index, upload){
             layer.msg("上传成功");
