@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2018-12-03 22:52:53
+Date: 2018-12-04 22:30:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `car_basics` (
 -- ----------------------------
 -- Records of car_basics
 -- ----------------------------
-INSERT INTO `car_basics` VALUES ('1', '奥迪', '奥迪Q5(进口)', '2015款 40 TFSI技术型', '43.16', '一汽大众奥迪', '中型SUV', '2014年12月', '汽油', '165', '2.0T 224马力 L4', 'wefsd', '5门5坐SUV', null, '7L', '三年或10万公里', '褐色', '2015年6月', '2018-12-02 13:59:44', '2018-12-03 21:29:53', '24.90', '-1', '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', '1');
+INSERT INTO `car_basics` VALUES ('1', '奥迪', '奥迪Q5(进口)', '2015款 40 TFSI技术型', '43.16', '一汽大众奥迪', '中型SUV', '2014年12月', '汽油', '165', '2.0T 224马力 L4', 'wefsd', '5门5坐SUV', null, '7L', '三年或10万公里', '褐色', '2015年6月', '2018-12-02 13:59:44', '2018-12-03 21:29:53', '24.90', null, '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', '1');
 
 -- ----------------------------
 -- Table structure for car_body
@@ -191,7 +191,7 @@ CREATE TABLE `file_info` (
   `c_id` int(11) DEFAULT NULL,
   `c_type` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of file_info
@@ -205,6 +205,11 @@ INSERT INTO `file_info` VALUES ('8', '80ae56049d86ce4cfd207c417ee030b0', 'image/
 INSERT INTO `file_info` VALUES ('10', 'f57dab1ec0bd7bd633bce9bf4118e225', 'image/jpeg', '1970', 'd:/files/2018/12/01/f57dab1ec0bd7bd633bce9bf4118e225.jpg', '/2018/12/01/f57dab1ec0bd7bd633bce9bf4118e225.jpg', '1', '2018-12-01 16:27:00', '2018-12-01 16:27:00', null, null);
 INSERT INTO `file_info` VALUES ('11', 'a4260131a1345c95792198a925fb8fa3', 'image/jpeg', '7296', 'd:/files/2018/12/01/a4260131a1345c95792198a925fb8fa3.jpg', '/2018/12/01/a4260131a1345c95792198a925fb8fa3.jpg', '1', '2018-12-01 16:27:37', '2018-12-02 13:47:53', null, null);
 INSERT INTO `file_info` VALUES ('12', '8bc7841dcf2dba6a9c391810b7e814f0', 'image/jpeg', '349451', 'd:/files/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', '1', '2018-12-02 13:59:39', '2018-12-02 13:59:39', null, null);
+INSERT INTO `file_info` VALUES ('13', '5e7e5a81ed72e1cabc94a79d943d4926', 'image/jpeg', '7951', 'd:/files/2018/12/04/5e7e5a81ed72e1cabc94a79d943d4926.jpg', '/2018/12/04/5e7e5a81ed72e1cabc94a79d943d4926.jpg', '1', '2018-12-04 21:30:08', '2018-12-04 21:30:08', '1', '1');
+INSERT INTO `file_info` VALUES ('15', 'a21e17efae19426f3cc0f29a83572892', 'image/jpeg', '6430', 'd:/files/2018/12/04/a21e17efae19426f3cc0f29a83572892.jpg', '/2018/12/04/a21e17efae19426f3cc0f29a83572892.jpg', '1', '2018-12-04 21:30:08', '2018-12-04 21:30:08', '1', '1');
+INSERT INTO `file_info` VALUES ('18', '601e103a5c0fefd00c3c6f16e9c48f0a', 'image/jpeg', '9052', 'd:/files/2018/12/04/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', '/2018/12/04/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', '1', '2018-12-04 22:14:38', '2018-12-04 22:14:38', '1', '1');
+INSERT INTO `file_info` VALUES ('21', '02930a273c149e70d41758dfafb1dc55', 'image/jpeg', '8747', 'd:/files/2018/12/04/02930a273c149e70d41758dfafb1dc55.jpg', '/2018/12/04/02930a273c149e70d41758dfafb1dc55.jpg', '1', '2018-12-04 22:16:36', '2018-12-04 22:16:36', '1', '1');
+INSERT INTO `file_info` VALUES ('23', 'ee7b2107eccd2512946374d75b7cea9c', 'image/jpeg', '7424', 'd:/files/2018/12/04/ee7b2107eccd2512946374d75b7cea9c.jpg', '/2018/12/04/ee7b2107eccd2512946374d75b7cea9c.jpg', '1', '2018-12-04 22:17:44', '2018-12-04 22:17:44', '1', '1');
 
 -- ----------------------------
 -- Table structure for ims_autoparts_car_brand
@@ -3812,7 +3817,7 @@ CREATE TABLE `sys_logs` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `create_time` (`create_time`) USING BTREE,
   KEY `user_id` (`user`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=584 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=677 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logs
@@ -4229,6 +4234,99 @@ INSERT INTO `sys_logs` VALUES ('580', '1', '校验当前用户的权限', '1', n
 INSERT INTO `sys_logs` VALUES ('581', '1', '校验当前用户的权限', '1', null, '2018-12-03 22:50:26');
 INSERT INTO `sys_logs` VALUES ('582', '1', '校验当前用户的权限', '1', null, '2018-12-03 22:50:38');
 INSERT INTO `sys_logs` VALUES ('583', '1', '校验当前用户的权限', '1', null, '2018-12-03 22:50:46');
+INSERT INTO `sys_logs` VALUES ('584', '1', 'web端登陆', '1', null, '2018-12-04 19:00:45');
+INSERT INTO `sys_logs` VALUES ('585', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 19:00:45');
+INSERT INTO `sys_logs` VALUES ('586', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:00:47');
+INSERT INTO `sys_logs` VALUES ('587', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 19:03:36');
+INSERT INTO `sys_logs` VALUES ('588', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:03:38');
+INSERT INTO `sys_logs` VALUES ('589', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:04:08');
+INSERT INTO `sys_logs` VALUES ('590', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:04:15');
+INSERT INTO `sys_logs` VALUES ('591', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:05:40');
+INSERT INTO `sys_logs` VALUES ('592', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:06:17');
+INSERT INTO `sys_logs` VALUES ('593', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:06:33');
+INSERT INTO `sys_logs` VALUES ('594', '1', 'web端登陆', '1', null, '2018-12-04 19:10:27');
+INSERT INTO `sys_logs` VALUES ('595', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 19:10:27');
+INSERT INTO `sys_logs` VALUES ('596', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:10:29');
+INSERT INTO `sys_logs` VALUES ('597', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:10:40');
+INSERT INTO `sys_logs` VALUES ('598', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:12:20');
+INSERT INTO `sys_logs` VALUES ('599', '1', '校验当前用户的权限', '1', null, '2018-12-04 19:12:36');
+INSERT INTO `sys_logs` VALUES ('600', '1', 'web端登陆', '1', null, '2018-12-04 21:22:58');
+INSERT INTO `sys_logs` VALUES ('601', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 21:22:59');
+INSERT INTO `sys_logs` VALUES ('602', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:23:00');
+INSERT INTO `sys_logs` VALUES ('603', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:23:10');
+INSERT INTO `sys_logs` VALUES ('604', '1', 'web端登陆', '1', null, '2018-12-04 21:24:13');
+INSERT INTO `sys_logs` VALUES ('605', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 21:24:13');
+INSERT INTO `sys_logs` VALUES ('606', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:24:15');
+INSERT INTO `sys_logs` VALUES ('607', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:26:09');
+INSERT INTO `sys_logs` VALUES ('608', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:27:05');
+INSERT INTO `sys_logs` VALUES ('609', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:28:37');
+INSERT INTO `sys_logs` VALUES ('610', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:29:37');
+INSERT INTO `sys_logs` VALUES ('611', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:29:40');
+INSERT INTO `sys_logs` VALUES ('612', '1', '图片上传', '1', null, '2018-12-04 21:30:07');
+INSERT INTO `sys_logs` VALUES ('613', '1', '图片上传', '1', null, '2018-12-04 21:30:07');
+INSERT INTO `sys_logs` VALUES ('614', '1', '图片上传', '1', null, '2018-12-04 21:30:07');
+INSERT INTO `sys_logs` VALUES ('615', '1', '图片上传', '1', null, '2018-12-04 21:30:09');
+INSERT INTO `sys_logs` VALUES ('616', '1', 'web端登陆', '1', null, '2018-12-04 21:50:55');
+INSERT INTO `sys_logs` VALUES ('617', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 21:50:55');
+INSERT INTO `sys_logs` VALUES ('618', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:50:56');
+INSERT INTO `sys_logs` VALUES ('619', '1', '校验当前用户的权限', '1', null, '2018-12-04 21:51:06');
+INSERT INTO `sys_logs` VALUES ('620', '1', 'web端登陆', '1', null, '2018-12-04 22:01:24');
+INSERT INTO `sys_logs` VALUES ('621', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 22:01:24');
+INSERT INTO `sys_logs` VALUES ('622', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:01:26');
+INSERT INTO `sys_logs` VALUES ('623', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:01:39');
+INSERT INTO `sys_logs` VALUES ('624', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:09:36');
+INSERT INTO `sys_logs` VALUES ('625', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:09:42');
+INSERT INTO `sys_logs` VALUES ('626', '1', 'web端登陆', '1', null, '2018-12-04 22:12:38');
+INSERT INTO `sys_logs` VALUES ('627', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 22:12:39');
+INSERT INTO `sys_logs` VALUES ('628', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:12:40');
+INSERT INTO `sys_logs` VALUES ('629', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:14:14');
+INSERT INTO `sys_logs` VALUES ('630', '1', '文件删除', '1', null, '2018-12-04 22:14:24');
+INSERT INTO `sys_logs` VALUES ('631', '1', '图片上传', '1', null, '2018-12-04 22:14:38');
+INSERT INTO `sys_logs` VALUES ('632', '1', '图片上传', '1', null, '2018-12-04 22:14:38');
+INSERT INTO `sys_logs` VALUES ('633', '1', '图片上传', '1', null, '2018-12-04 22:14:38');
+INSERT INTO `sys_logs` VALUES ('634', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:15:07');
+INSERT INTO `sys_logs` VALUES ('635', '1', '文件删除', '1', null, '2018-12-04 22:15:13');
+INSERT INTO `sys_logs` VALUES ('636', '1', '图片上传', '1', null, '2018-12-04 22:15:17');
+INSERT INTO `sys_logs` VALUES ('637', '1', '文件删除', '1', null, '2018-12-04 22:15:20');
+INSERT INTO `sys_logs` VALUES ('638', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:16:22');
+INSERT INTO `sys_logs` VALUES ('639', '1', '图片上传', '1', null, '2018-12-04 22:16:35');
+INSERT INTO `sys_logs` VALUES ('640', '1', '图片上传', '1', null, '2018-12-04 22:16:35');
+INSERT INTO `sys_logs` VALUES ('641', '1', '文件删除', '1', null, '2018-12-04 22:16:39');
+INSERT INTO `sys_logs` VALUES ('642', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:17:30');
+INSERT INTO `sys_logs` VALUES ('643', '1', '图片上传', '1', null, '2018-12-04 22:17:44');
+INSERT INTO `sys_logs` VALUES ('644', '1', '图片上传', '1', null, '2018-12-04 22:17:54');
+INSERT INTO `sys_logs` VALUES ('645', '1', '图片上传', '1', null, '2018-12-04 22:17:54');
+INSERT INTO `sys_logs` VALUES ('646', '1', '文件删除', '1', null, '2018-12-04 22:17:57');
+INSERT INTO `sys_logs` VALUES ('647', '1', '文件删除', '1', null, '2018-12-04 22:17:59');
+INSERT INTO `sys_logs` VALUES ('648', '1', '文件删除', '1', null, '2018-12-04 22:18:08');
+INSERT INTO `sys_logs` VALUES ('649', '1', '文件删除', '1', null, '2018-12-04 22:18:14');
+INSERT INTO `sys_logs` VALUES ('650', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:18:15');
+INSERT INTO `sys_logs` VALUES ('651', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:18:23');
+INSERT INTO `sys_logs` VALUES ('652', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:19:27');
+INSERT INTO `sys_logs` VALUES ('653', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:20:52');
+INSERT INTO `sys_logs` VALUES ('654', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:21:13');
+INSERT INTO `sys_logs` VALUES ('655', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:21:30');
+INSERT INTO `sys_logs` VALUES ('656', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:21:34');
+INSERT INTO `sys_logs` VALUES ('657', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:21:36');
+INSERT INTO `sys_logs` VALUES ('658', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:23:11');
+INSERT INTO `sys_logs` VALUES ('659', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:23:21');
+INSERT INTO `sys_logs` VALUES ('660', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:26:15');
+INSERT INTO `sys_logs` VALUES ('661', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 22:26:28');
+INSERT INTO `sys_logs` VALUES ('662', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:26:29');
+INSERT INTO `sys_logs` VALUES ('663', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:26:43');
+INSERT INTO `sys_logs` VALUES ('664', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:26:45');
+INSERT INTO `sys_logs` VALUES ('665', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:26:47');
+INSERT INTO `sys_logs` VALUES ('666', '1', '根据角色id删除权限', '1', null, '2018-12-04 22:26:49');
+INSERT INTO `sys_logs` VALUES ('667', '1', '保存菜单', '1', null, '2018-12-04 22:28:05');
+INSERT INTO `sys_logs` VALUES ('668', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:28:06');
+INSERT INTO `sys_logs` VALUES ('669', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:28:12');
+INSERT INTO `sys_logs` VALUES ('670', '1', '根据角色id删除权限', '1', null, '2018-12-04 22:28:15');
+INSERT INTO `sys_logs` VALUES ('671', '1', '保存角色', '1', null, '2018-12-04 22:28:18');
+INSERT INTO `sys_logs` VALUES ('672', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:28:20');
+INSERT INTO `sys_logs` VALUES ('673', '1', '退出', '1', null, '2018-12-04 22:28:22');
+INSERT INTO `sys_logs` VALUES ('674', '1', 'web端登陆', '1', null, '2018-12-04 22:28:27');
+INSERT INTO `sys_logs` VALUES ('675', '1', '当前登录用户拥有的权限', '1', null, '2018-12-04 22:28:28');
+INSERT INTO `sys_logs` VALUES ('676', '1', '校验当前用户的权限', '1', null, '2018-12-04 22:28:29');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -4244,7 +4342,7 @@ CREATE TABLE `sys_permission` (
   `permission` varchar(50) DEFAULT NULL,
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -4292,6 +4390,7 @@ INSERT INTO `sys_permission` VALUES ('49', '0', '商家信息', 'fa-bank', '/pag
 INSERT INTO `sys_permission` VALUES ('50', '49', '新增', null, null, '2', 'seller:add', '100');
 INSERT INTO `sys_permission` VALUES ('51', '49', '编辑', null, null, '2', 'seller:edit', '100');
 INSERT INTO `sys_permission` VALUES ('52', '49', '删除', null, null, '2', 'seller:del', '100');
+INSERT INTO `sys_permission` VALUES ('53', '45', '导入', 'fa-arrow-circle-o-up', null, '2', 'car:import', '100');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -4313,7 +4412,7 @@ CREATE TABLE `sys_role` (
 INSERT INTO `sys_role` VALUES ('1', 'ADMIN', '管理员', '2017-05-01 13:25:39', '2017-10-05 21:59:18');
 INSERT INTO `sys_role` VALUES ('2', 'USER', '用户', '2017-08-01 21:47:31', '2017-10-05 21:59:26');
 INSERT INTO `sys_role` VALUES ('3', 'TEST', 'cesgi', '2018-11-25 22:14:05', '2018-11-25 22:20:02');
-INSERT INTO `sys_role` VALUES ('4', '后台管理员', '系统后台管理', '2018-12-01 14:38:23', '2018-12-02 14:41:48');
+INSERT INTO `sys_role` VALUES ('4', '后台管理员', '系统后台管理', '2018-12-01 14:38:23', '2018-12-04 22:28:19');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -4430,6 +4529,7 @@ INSERT INTO `sys_role_permission` VALUES ('4', '49');
 INSERT INTO `sys_role_permission` VALUES ('4', '50');
 INSERT INTO `sys_role_permission` VALUES ('4', '51');
 INSERT INTO `sys_role_permission` VALUES ('4', '52');
+INSERT INTO `sys_role_permission` VALUES ('4', '53');
 
 -- ----------------------------
 -- Table structure for sys_role_user
