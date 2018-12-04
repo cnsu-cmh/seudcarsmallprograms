@@ -576,6 +576,20 @@
     </div>
 </div>
 
+<div id="carImagesDiv">
+    <fieldset>
+        <details id="carImagesDetails">
+            <summary>图片信息</summary>
+            <button type="button" class="layui-btn" id="carImagesUploadBtn">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+            <div class="col-md-12">
+                <div id="carImagesShowDiv"></div>
+            </div>
+        </details>
+    </fieldset>
+</div>
+
 <script type="text/javascript" th:src="@{/static/js/libs/jquery-2.1.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/plugin/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/plugin/bootstrapvalidator/bootstrapValidator.min.js}"></script>
@@ -584,6 +598,8 @@
 <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/jq.js}"></script>
 <script type="text/javascript">
+
+    var carId = $("#carBasicsForm #id").val();
     var pro = window.location.protocol;
     var host = window.location.host;
     var domain = pro + "//" + host;
@@ -604,6 +620,23 @@
                 layer.msg("上传成功");
             }
         });
+
+        upload.render({
+            elem: '#carImagesUploadBtn'
+            , accept: 'images'
+            , url: '/carBasicss/uploadImages/'+carId
+            , multiple: true
+            , done: function (res, index, upload) {
+                var url = res.url;
+                var src = domain + "/files" + url;
+                var a = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "'></img></a>";
+                $("#carImagesShowDiv").append(a);
+            },
+            allDone: function(obj){
+                layer.msg("上传成功");
+            }
+        });
+
     });
 
     function addCarBasics() {

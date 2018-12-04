@@ -8,6 +8,7 @@ import com.xiaoshu.seudcarsmallprograms.model.CarBasics;
 import com.xiaoshu.seudcarsmallprograms.model.CarBody;
 import com.xiaoshu.seudcarsmallprograms.model.CarEngine;
 import com.xiaoshu.seudcarsmallprograms.model.SellerInformation;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface CarBasicsService {
 
@@ -32,4 +33,6 @@ public interface CarBasicsService {
     CarBasics saveCarBasicsSeller(CarSellerDto carSellerDto);
 
     CarBasics under(Long id);
+
+    void importCarBasics(MultipartFile file) throws Exception;
 }

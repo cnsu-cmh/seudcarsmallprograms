@@ -1,7 +1,11 @@
 package com.xiaoshu.seudcarsmallprograms.controller;
 
 
+import com.xiaoshu.seudcarsmallprograms.annotation.LogAnnotation;
 import com.xiaoshu.seudcarsmallprograms.dto.CarSellerDto;
+import com.xiaoshu.seudcarsmallprograms.model.FileInfo;
+import com.xiaoshu.seudcarsmallprograms.service.FileService;
+import com.xiaoshu.seudcarsmallprograms.util.ResponseEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +17,10 @@ import com.xiaoshu.seudcarsmallprograms.service.CarBasicsService;
 import com.xiaoshu.seudcarsmallprograms.model.CarBasics;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/carBasicss")
@@ -22,6 +28,9 @@ public class CarBasicsController {
 
     @Autowired
     private CarBasicsService carBasicsService;
+
+    @Autowired
+    private FileService fileService;
 
     @PostMapping
     @ApiOperation(value = "保存")
@@ -78,6 +87,26 @@ public class CarBasicsController {
     @RequiresPermissions({"car:under"})
     public CarBasics under(@PathVariable Long id) {
         return carBasicsService.under(id);
+    }
+
+
+    @LogAnnotation(module = "图片上传")
+    @PostMapping("/uploadImages/{carId}")
+    public FileInfo uploadFile(MultipartFile file, Long carId) throws IOException {
+        FileInfo fileInfo = fileService.save(file);
+        return fileInfo;
+    }
+
+    @PostMapping("/import")
+    @RequiresPermissions({"car:import"})
+    public ResponseEntity importCarBasics(MultipartFile file) {
+        try{
+            carBasicsService.importCarBasics(file);
+            return ResponseEntity.success();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.failure();
     }
 
 }
