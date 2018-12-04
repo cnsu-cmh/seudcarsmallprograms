@@ -1,5 +1,6 @@
 package com.xiaoshu.seudcarsmallprograms.service.impl;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.xiaoshu.seudcarsmallprograms.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CarBasicsServiceImpl implements CarBasicsService {
@@ -111,5 +113,10 @@ public class CarBasicsServiceImpl implements CarBasicsService {
     public CarBasics under(Long id) {
         carBasicsMapper.under(id);
         return carBasicsMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void importCarBasics(MultipartFile file) throws Exception {
+        InputStream is = null;
     }
 }

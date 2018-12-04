@@ -19,7 +19,7 @@
 		                   			<form class="form-inline" onsubmit="return false">
 										<div class="form-group">
 											id：
-											<input id="id" type="text" class="form-control" placeholder="id">
+											<input id="id" type="text" class="form-control" placeholder="车型">
 											<button id="searchBt" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>搜索</button>
 										</div>
 									</form>
@@ -28,6 +28,9 @@
 	                   				<button class="layui-btn layui-btn-sm" onclick="location.href='addCarBasics'">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
+									<button type="button" class="layui-btn" id="importCarBtn">
+										<i class="layui-icon">&#xe67c;</i>导入
+									</button>
 	                   			</td>
 	                   		</tr> 
 	                    </table>
@@ -75,6 +78,7 @@ var layer;
 layui.use('layer', function(){
     layer = layui.layer;
 });
+
 var pers = checkPermission();
 var pro = window.location.protocol;
 var host = window.location.host;
@@ -178,6 +182,19 @@ function under(id){
         layer.close(1);
     });
 }
+
+layui.use('upload', function(){
+    var upload = layui.upload;
+    upload.render({
+        elem: '#importCarBtn'
+        ,exts: 'xls,xlsx'
+        ,url: '/carBasicss/import'
+        ,done: function(res, index, upload){
+            layer.msg("上传成功");
+            example.ajax.reload();
+        }
+    });
+});
 
 $("#searchBt").click(function(){
 	example.ajax.reload();
