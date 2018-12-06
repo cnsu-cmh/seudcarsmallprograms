@@ -24,4 +24,6 @@ public interface DictService {
     void delete(Long id);
 
     List<Map<String, String>> selectAllType();
+
+    List<String> selectValByType(String type);
 }

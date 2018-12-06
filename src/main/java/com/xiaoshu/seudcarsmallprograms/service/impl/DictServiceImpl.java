@@ -69,4 +69,9 @@ public class DictServiceImpl implements DictService {
     public List<Map<String, String>> selectAllType() {
         return dictMapper.selectAllType();
     }
+
+    @Override
+    public List<String> selectValByType(String type) {
+        return dictMapper.selectAllValType(type);
+    }
 }

@@ -34,4 +34,16 @@ public class DictApiController extends ApiController {
     public List<Map<String,String>> listAllType() {
         return dictService.selectAllType();
     }
+
+    @GetMapping(value = "/dict/listValByType", params = "type" )
+    @ResponseBody
+    @ApiOperation(value = "根据type获取字典val")
+    @ApiImplicitParam(name = "type",value = "字典类型,比如sex",dataType = "String",paramType = "query")
+    public List<String> listValByType(String type) {
+        List<String> val = dictService.selectValByType(type);
+        if("carLevel".equals(type)) {
+            val.add(0,"不限");
+        }
+        return val;
+    }
 }
