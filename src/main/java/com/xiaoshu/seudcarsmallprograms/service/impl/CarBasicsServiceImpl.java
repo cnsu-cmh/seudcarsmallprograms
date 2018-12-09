@@ -4,7 +4,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import com.xiaoshu.seudcarsmallprograms.dto.CarBasicsDto;
 import com.xiaoshu.seudcarsmallprograms.dto.CarSellerDto;
+import com.xiaoshu.seudcarsmallprograms.vo.CarBasicsVo;
 import com.xiaoshu.seudcarsmallprograms.mapper.CarBodyMapper;
 import com.xiaoshu.seudcarsmallprograms.mapper.CarEngineMapper;
 import com.xiaoshu.seudcarsmallprograms.mapper.SellerInformationMapper;
@@ -118,5 +120,10 @@ public class CarBasicsServiceImpl implements CarBasicsService {
     @Override
     public void importCarBasics(MultipartFile file) throws Exception {
         InputStream is = null;
+    }
+
+    @Override
+    public List<CarBasicsVo> selectListCondition(CarBasicsDto carBasicsDto) {
+        return carBasicsMapper.selectListCondition(carBasicsDto);
     }
 }

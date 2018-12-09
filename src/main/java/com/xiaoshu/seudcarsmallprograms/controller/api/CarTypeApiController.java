@@ -1,9 +1,9 @@
 package com.xiaoshu.seudcarsmallprograms.controller.api;
 
-import com.xiaoshu.seudcarsmallprograms.dto.CarTypeDto;
 import com.xiaoshu.seudcarsmallprograms.model.ImsAutopartsCarType;
 import com.xiaoshu.seudcarsmallprograms.service.ImsAutopartsCarTypeService;
 import com.xiaoshu.seudcarsmallprograms.util.Base64Img;
+import com.xiaoshu.seudcarsmallprograms.vo.CarTypeVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +43,12 @@ public class CarTypeApiController extends ApiController{
 
     @GetMapping("/carType/carTypesByBrandId/{brandId}")
     @ApiOperation(value = "根据车品牌ID查询车类型，比如“185")
-    public List<CarTypeDto> getCarTypesByBrandId(@PathVariable Long brandId) {
+    public List<CarTypeVo> getCarTypesByBrandId(@PathVariable Long brandId) {
         List<ImsAutopartsCarType> autopartsCarTypes = imsAutopartsCarTypeService.getByBrandId(brandId);
         return autopartsCarTypes.parallelStream().map(t -> imsAutopartsCarType2CarTypeInfo(t)).collect(Collectors.toCollection(LinkedList::new));
     }
 
-    private CarTypeDto imsAutopartsCarType2CarTypeInfo(ImsAutopartsCarType carType) {
-        return new CarTypeDto(carType.getId(),carType.getName(),Base64Img.getBase64ImageStr(filesPath + carType.getPicUrl()));
+    private CarTypeVo imsAutopartsCarType2CarTypeInfo(ImsAutopartsCarType carType) {
+        return new CarTypeVo(carType.getId(),carType.getName(),Base64Img.getBase64ImageStr(filesPath + carType.getPicUrl()));
     }
 }

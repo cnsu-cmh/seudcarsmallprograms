@@ -1,10 +1,10 @@
-package com.xiaoshu.seudcarsmallprograms.dto;
+package com.xiaoshu.seudcarsmallprograms.vo;
 
 
 import java.io.Serializable;
 import java.util.List;
 
-public class CarBrandDto implements Serializable {
+public class CarBrandVo implements Serializable {
 
     private static final long serialVersionUID = -336015513686371234L;
 
@@ -14,7 +14,7 @@ public class CarBrandDto implements Serializable {
 
     private List<CarBrandInfo> list;
 
-    public CarBrandDto(Integer id, String title, List<CarBrandInfo> list) {
+    public CarBrandVo(Integer id, String title, List<CarBrandInfo> list) {
         this.id = id;
         this.title = title;
         this.list = list;

@@ -1,9 +1,9 @@
 package com.xiaoshu.seudcarsmallprograms.controller.api;
 
-import com.xiaoshu.seudcarsmallprograms.dto.CarBrandDto;
 import com.xiaoshu.seudcarsmallprograms.model.ImsAutopartsCarBrand;
 import com.xiaoshu.seudcarsmallprograms.service.ImsAutopartsCarBrandService;
 import com.xiaoshu.seudcarsmallprograms.util.Base64Img;
+import com.xiaoshu.seudcarsmallprograms.vo.CarBrandVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,24 +48,24 @@ public class CarBrandApiController extends ApiController{
 
     @GetMapping(value = "/carBrand/allBrand")
     @ApiOperation(value = "所有车品牌")
-    public List<CarBrandDto> listAll() {
+    public List<CarBrandVo> listAll() {
         List<ImsAutopartsCarBrand> carBrands = imsAutopartsCarBrandService.selectAll();
-        List<CarBrandDto.CarBrandInfo> isHotBrands = carBrands.stream().filter(cb -> cb.getIsHot()).map(b -> imsAutopartsCarBrand2CarBrandInfo(b)).collect(Collectors.toList());
-        CarBrandDto isHotBrand = new CarBrandDto(0,"热门品牌",isHotBrands);
-        CarBrandDto noBrand = new CarBrandDto(1,"*",new ArrayList<CarBrandDto.CarBrandInfo>(){{add(new CarBrandDto.CarBrandInfo(0L,"不限品牌", ""));}});
+        List<CarBrandVo.CarBrandInfo> isHotBrands = carBrands.stream().filter(cb -> cb.getIsHot()).map(b -> imsAutopartsCarBrand2CarBrandInfo(b)).collect(Collectors.toList());
+        CarBrandVo isHotBrand = new CarBrandVo(0,"热门品牌",isHotBrands);
+        CarBrandVo noBrand = new CarBrandVo(1,"*",new ArrayList<CarBrandVo.CarBrandInfo>(){{add(new CarBrandVo.CarBrandInfo(0L,"不限品牌", ""));}});
         Map<String, List<ImsAutopartsCarBrand>> carBrandMap = carBrands.stream().collect(Collectors.groupingBy(ImsAutopartsCarBrand::getInitials,LinkedHashMap::new,Collectors.toCollection(LinkedList::new)));
-        List<CarBrandDto> result = new LinkedList<>();
+        List<CarBrandVo> result = new LinkedList<>();
         result.add(isHotBrand);
         result.add(noBrand);
         carBrandMap.forEach((k,v) -> {
-            LinkedList<CarBrandDto.CarBrandInfo> carBrandInfos = v.parallelStream().map(b -> imsAutopartsCarBrand2CarBrandInfo(b)).collect(Collectors.toCollection(LinkedList::new));
-            result.add(new CarBrandDto(result.size(),k,carBrandInfos));
+            LinkedList<CarBrandVo.CarBrandInfo> carBrandInfos = v.parallelStream().map(b -> imsAutopartsCarBrand2CarBrandInfo(b)).collect(Collectors.toCollection(LinkedList::new));
+            result.add(new CarBrandVo(result.size(),k,carBrandInfos));
         });
         return result;
     }
 
-    private CarBrandDto.CarBrandInfo imsAutopartsCarBrand2CarBrandInfo(ImsAutopartsCarBrand carBrand) {
-        return new CarBrandDto.CarBrandInfo(carBrand.getId(), carBrand.getName(),Base64Img.getBase64ImageStr(filesPath + carBrand.getPicUrl()));
+    private CarBrandVo.CarBrandInfo imsAutopartsCarBrand2CarBrandInfo(ImsAutopartsCarBrand carBrand) {
+        return new CarBrandVo.CarBrandInfo(carBrand.getId(), carBrand.getName(),Base64Img.getBase64ImageStr(filesPath + carBrand.getPicUrl()));
     }
 
 }

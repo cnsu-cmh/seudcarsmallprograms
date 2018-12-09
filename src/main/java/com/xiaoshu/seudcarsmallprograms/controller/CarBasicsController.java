@@ -19,7 +19,6 @@ import com.xiaoshu.seudcarsmallprograms.model.CarBasics;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController

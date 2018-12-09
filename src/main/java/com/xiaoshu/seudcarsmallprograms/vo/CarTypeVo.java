@@ -1,8 +1,8 @@
-package com.xiaoshu.seudcarsmallprograms.dto;
+package com.xiaoshu.seudcarsmallprograms.vo;
 
 import java.io.Serializable;
 
-public class CarTypeDto implements Serializable {
+public class CarTypeVo implements Serializable {
 
     private static final long serialVersionUID = -3278422900465259496L;
 
@@ -12,7 +12,7 @@ public class CarTypeDto implements Serializable {
 
     private String src;
 
-    public CarTypeDto(Long id, String name, String src) {
+    public CarTypeVo(Long id, String name, String src) {
         this.id = id;
         this.name = name;
         this.src = src;

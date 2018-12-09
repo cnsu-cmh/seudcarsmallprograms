@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshu.seudcarsmallprograms.mapper.CarBasicsMapper">
+
+    <resultMap id="ApiResultMap" type="com.xiaoshu.seudcarsmallprograms.vo.CarBasicsVo">
+        <id column="id" property="id" />
+        <id column="brand" property="brand" />
+        <id column="type" property="type" />
+        <id column="name" property="name" />
+        <id column="level" property="level" />
+        <id column="engine" property="engine" />
+        <id column="car_structure" property="carStructure" />
+        <id column="guarantee" property="guarantee" />
+        <id column="playing_cards" property="playingCards" />
+        <id column="selling_price" property="sellingPrice" />
+        <id column="wel_pic" property="welPic" />
+    </resultMap>
+
+
+    <sql id="where">
+        <where>
+            <if test="params.brand != null and params.brand != ''">
+                and t.brand = #{params.brand}
+            </if>
+            <if test="params.type != null and params.type != ''">
+                and t.type = #{params.type}
+            </if>
+            <if test="params.level != null and params.level != ''">
+                and t.level = #{params.level}
+            </if>
+            <if test="params.minPrice != null and params.minPrice != ''">
+                and DATE(t.selling_price) >= #{params.minPrice}
+            </if>
+            <if test="params.maxPrice != null and params.maxPrice != ''">
+                and DATE(t.selling_price) &lt;= #{params.maxPrice}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="sorted">
+        <choose>
+            <when test="params.sort != null and params.sort != '' and params.sort == '价格最低' ">
+              order by t.selling_price asc
+            </when>
+            <when test="params.sort != null and params.sort != '' and params.sort == '价格最高' ">
+                order by t.selling_price desc
+            </when>
+            <when test="params.sort != null and params.sort != '' and params.sort == '最近发布' ">
+                order by t.update_time desc
+            </when>
+            <when test="params.sort != null and params.sort != '' and params.sort == '车龄最短' ">
+                order by t.playing_cards desc
+            </when>
+            <otherwise>
+                order by t.selling_price,t.update_time desc
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectListCondition" resultMap="ApiResultMap">
+        select t.id,t.brand,t.type,t.name,t.level,t.engine,t.car_structure,t.guarantee,t.playing_cards,t.selling_price,t.wel_pic
+        from car_basics t
+        <include refid="where" />
+        <include refid="sorted" />
+    </select>
+
+</mapper>
