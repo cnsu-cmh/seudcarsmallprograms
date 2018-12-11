@@ -13,6 +13,7 @@ public class CarBasicsDto implements Serializable {
     private String  brand;
     private String type;
     private String level;
+    private String price;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
 
@@ -62,5 +63,13 @@ public class CarBasicsDto implements Serializable {
 
     public void setMaxPrice(BigDecimal maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
