@@ -65,7 +65,7 @@ public class CarBrandApiController extends ApiController{
     }
 
     private CarBrandVo.CarBrandInfo imsAutopartsCarBrand2CarBrandInfo(ImsAutopartsCarBrand carBrand) {
-        return new CarBrandVo.CarBrandInfo(carBrand.getId(), carBrand.getName(),Base64Img.getBase64ImageStr(filesPath + carBrand.getPicUrl()));
+        return new CarBrandVo.CarBrandInfo(carBrand.getId(), carBrand.getName(),Base64Img.getBase64ImageStr(filesPath , carBrand.getPicUrl()));
     }
 
 }

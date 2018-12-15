@@ -26,14 +26,14 @@
             <if test="params.type != null and params.type != ''">
                 and t.type = #{params.type}
             </if>
-            <if test="params.level != null and params.level != ''">
+            <if test="params.level != null and params.level != '' and params.level != '不限' ">
                 and t.level = #{params.level}
             </if>
             <if test="params.minPrice != null and params.minPrice != ''">
-                and DATE(t.selling_price) >= #{params.minPrice}
+                and t.selling_price >= #{params.minPrice}
             </if>
             <if test="params.maxPrice != null and params.maxPrice != ''">
-                and DATE(t.selling_price) &lt;= #{params.maxPrice}
+                and t.selling_price &lt;= #{params.maxPrice}
             </if>
         </where>
     </sql>

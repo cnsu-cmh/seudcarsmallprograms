@@ -49,6 +49,6 @@ public class CarTypeApiController extends ApiController{
     }
 
     private CarTypeVo imsAutopartsCarType2CarTypeInfo(ImsAutopartsCarType carType) {
-        return new CarTypeVo(carType.getId(),carType.getName(),Base64Img.getBase64ImageStr(filesPath + carType.getPicUrl()));
+        return new CarTypeVo(carType.getId(),carType.getName(),Base64Img.getBase64ImageStr(filesPath , carType.getPicUrl()));
     }
 }
