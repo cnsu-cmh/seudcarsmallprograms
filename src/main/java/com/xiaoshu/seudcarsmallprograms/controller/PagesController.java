@@ -189,7 +189,7 @@ public class PagesController {
         ImsAutopartsCarBrandService brandService = SpringUtil.getBean(ImsAutopartsCarBrandServiceImpl.class);
         DictService dictService = SpringUtil.getBean(DictServiceImpl.class);
         SellerInformationService sellerService = SpringUtil.getBean(SellerInformationServiceImpl.class);
-        map.put("carBasics",brandService.selectAll());
+        map.put("carBrands",brandService.selectAll());
         map.put("carLevels",dictService.selectByType("carLevel"));
         map.put("sellers",sellerService.selectAll());
         return "carBasics/addCarBasics";
