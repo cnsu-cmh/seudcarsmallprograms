@@ -20,6 +20,7 @@
 
     <sql id="where">
         <where>
+            t.status = 1
             <if test="params.brand != null and params.brand != '' and params.brand != '不限品牌'">
                 and t.brand = #{params.brand}
             </if>

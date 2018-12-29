@@ -48,12 +48,12 @@ public class CarBasicsApiController extends ApiController {
     @GetMapping("/carBasics/carBasicsById")
     public ResponseEntity carBasicsById(Long id) {
         CarBasics carBasics = carBasicsService.getById(id);
-        SellerInformation seller = carBasicsService.selectSellerInfoByCarId(id);
+        SellerInformation seller = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
         List<FileInfo> files = fileService.getByCIdAndCType(id, FileInfo.CType.car);
         files.forEach(f -> f.setPath(Base64Img.getBase64ImageStr(filesPath , f.getUrl())));
         ResponseEntity responseEntity = ResponseEntity.success();
         responseEntity.setAny("data",carBasics);
-        responseEntity.setAny("seller",seller);
+        responseEntity.setAny("seller",seller == null ? new SellerInformation() : seller);
         responseEntity.setAny("files",files);
         return responseEntity;
     }

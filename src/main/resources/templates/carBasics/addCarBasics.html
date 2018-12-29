@@ -605,14 +605,14 @@
 <script type="text/javascript" th:src="@{/static/js/jq.js}"></script>
 <script type="text/javascript">
 
-    var carId = $("#carBasicsForm #id").val();
     var pro = window.location.protocol;
     var host = window.location.host;
     var domain = pro + "//" + host;
     var layer;
+    var upload;
     layui.use(['layer', 'laydate', 'upload'], function () {
         layer = layui.layer;
-        var upload = layui.upload;
+        upload = layui.upload;
         upload.render({
             elem: '#welPicUploadBtn' //绑定元素
             , accept: 'images' //允许上传的文件类型
@@ -624,9 +624,13 @@
                 var a = "<a target='_blank' href='" + src + "'><img width='50' src='" + src + "'></img></a>";
                 $("#welPicDiv").html(a);
                 layer.msg("上传成功");
+                addCarBasics();
             }
         });
 
+    });
+
+    function uploadImages(carId) {
         upload.render({
             elem: '#carImagesUploadBtn'
             , accept: 'images'
@@ -659,8 +663,8 @@
                 ;
             }
         });
+    }
 
-    });
 
     function addCarBasics() {
         $('#carBasicsForm').bootstrapValidator();
@@ -680,6 +684,7 @@
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
                     var carBasicsId = data.id;
+                    uploadImages(carBasicsId);
                     $("#carBasicsForm #id").val(carBasicsId);
                     $("#carBodyForm #carId").val(carBasicsId);
                     $("#carEngineForm #carId").val(carBasicsId);
@@ -764,6 +769,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000});
+                $("#carSellerDetails").attr("open", false);
+                $("#carImagesDetails").attr("open", true);
             }
         })
 
