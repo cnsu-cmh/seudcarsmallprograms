@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 29/12/2018 14:26:47
+ Date: 29/12/2018 17:56:07
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `car_basics`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   `selling_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
-  `status` int(5) NULL DEFAULT NULL,
+  `status` int(5) NULL DEFAULT 1,
   `wel_pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `seller_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -55,12 +55,18 @@ CREATE TABLE `car_basics`  (
   INDEX `price`(`selling_price`) USING BTREE,
   INDEX `fk_seller_car_id`(`seller_id`) USING BTREE,
   CONSTRAINT `fk_seller_car_id` FOREIGN KEY (`seller_id`) REFERENCES `seller_information` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of car_basics
 -- ----------------------------
-INSERT INTO `car_basics` VALUES (1, '奥迪', '奥迪Q5(进口)', '2015款 40 TFSI技术型', 43.16, '一汽大众奥迪', '中型SUV', '2014年12月', '汽油', '165', '2.0T 224马力 L4', 'wefsd', '5门5坐SUV', NULL, '7L', '三年或10万公里', '褐色', '2015年6月', '2018-12-02 13:59:44', '2018-12-03 21:29:53', 24.90, NULL, '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', 1);
+INSERT INTO `car_basics` VALUES (1, '奥迪', '奥迪Q5(进口)', '2015款 40 TFSI技术型', 43.16, '一汽大众奥迪', '中型SUV', '2014年12月', '汽油', '165', '2.0T 224马力 L4', 'wefsd', '5门5坐SUV', NULL, '7L', '三年或10万公里', '褐色', '2015年6月', '2018-12-02 13:59:44', '2018-12-03 21:29:53', 24.90, 1, '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', 1);
+INSERT INTO `car_basics` VALUES (2, '奥迪', '奥迪A3', '2016款 40 TFSI技术型', 43.16, '一汽大众奥迪', '紧凑型SUV', '2011年12月', '汽油', '165', '2.0T 224马力 L4', NULL, NULL, NULL, NULL, NULL, NULL, '2012年6月', '2018-12-29 16:41:24', '2018-12-29 16:41:24', 16.90, 1, '/2018/12/29/39d766c18c08f604b71483627c6a7eaa.jpg', 1);
+INSERT INTO `car_basics` VALUES (3, 'ABT', 'ABT', '2015款 40 TFSI技术型', 43.16, '一汽大众奥迪', NULL, '2014年12月', '汽油', NULL, '2.0T 224马力 L4', NULL, NULL, NULL, NULL, NULL, NULL, '2015年6月', '2018-12-29 16:56:23', '2018-12-29 16:56:23', 32.90, 1, '/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', 1);
+INSERT INTO `car_basics` VALUES (4, 'ATS', 'ATS', '2015款 40 TFSI技术型', NULL, NULL, NULL, '2014年12月', '汽油', NULL, '2.0T 224马力', NULL, NULL, NULL, NULL, NULL, NULL, '三年', '2018-12-29 17:04:00', '2018-12-29 17:04:00', 50.00, -1, NULL, NULL);
+INSERT INTO `car_basics` VALUES (5, '阿尔法·罗密欧', 'Stelvio', '2015款 40 TFSI技术型', 100.00, '一汽大众奥迪', '跑车', '2018年12月', '汽油', '165', '2.0T 224马力 L4', NULL, NULL, NULL, NULL, NULL, NULL, '2015年6月', '2018-12-29 17:09:21', '2018-12-29 17:15:01', 100.00, 1, '/2018/12/29/dfe59192ef6954408bc1fa6b39b35147.jpg', NULL);
+INSERT INTO `car_basics` VALUES (6, 'ABT', 'ABT', '2015款 40 TFSI技术型', 111.00, '111', NULL, '2.0T 224马力 L4', '111', NULL, '111', NULL, NULL, NULL, NULL, NULL, NULL, '111', '2018-12-29 17:10:33', '2018-12-29 17:14:47', 111.00, 1, '/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', 1);
+INSERT INTO `car_basics` VALUES (7, 'ABT', 'ABT', '292644410@qq.com', NULL, NULL, NULL, '1111', '11111', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, '11', '2018-12-29 17:15:31', '2018-12-29 17:20:15', 1.00, -1, '/2018/12/29/f1b058cd98bfeb4fa9c6564691fd8dde.jpg', NULL);
 
 -- ----------------------------
 -- Table structure for car_body
@@ -85,12 +91,16 @@ CREATE TABLE `car_body`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_car_body_basics`(`car_id`) USING BTREE,
   CONSTRAINT `fk_car_body_basics` FOREIGN KEY (`car_id`) REFERENCES `car_basics` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of car_body
 -- ----------------------------
 INSERT INTO `car_body` VALUES (1, 1, 4629, 4898, 1655, 2807, 555, 333, 5, 5, 75, 540, 1900, '2018-12-02 14:00:51', '2018-12-03 21:30:12');
+INSERT INTO `car_body` VALUES (2, 2, 11111, 1111, 1111, 111, 111, 11, 5, 5, 555, 5, 55555, '2018-12-29 16:41:45', '2018-12-29 16:41:45');
+INSERT INTO `car_body` VALUES (3, 3, 222, 222, 2, NULL, NULL, NULL, 5, 5, 5, NULL, 5, '2018-12-29 16:56:37', '2018-12-29 16:56:37');
+INSERT INTO `car_body` VALUES (4, NULL, 3333, 3333, 3333, 333, 33, 33, 5, 5, 555, 5, 5, '2018-12-29 17:04:31', '2018-12-29 17:04:31');
+INSERT INTO `car_body` VALUES (5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2018-12-29 17:10:53', '2018-12-29 17:10:53');
 
 -- ----------------------------
 -- Table structure for car_engine
@@ -120,12 +130,15 @@ CREATE TABLE `car_engine`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_car_engine_basics`(`car_id`) USING BTREE,
   CONSTRAINT `fk_car_engine_basics` FOREIGN KEY (`car_id`) REFERENCES `car_basics` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of car_engine
 -- ----------------------------
 INSERT INTO `car_engine` VALUES (1, 1, 'EA888', 1984, '2.0', '涡轮增压', 'L', 4, 4, 224, 165, '4300-6000', '汽油', '95号', '混合喷射', '铝合金', '铸铁', '国V', '2018-12-02 14:03:56', '2018-12-02 14:03:56');
+INSERT INTO `car_engine` VALUES (2, 2, 'EA888', 1984, '2.0', '涡轮增压', NULL, NULL, NULL, NULL, NULL, NULL, '汽油', '97号', NULL, NULL, NULL, NULL, '2018-12-29 16:42:27', '2018-12-29 16:42:27');
+INSERT INTO `car_engine` VALUES (3, 3, 'EA888', 1984, '2.0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '汽油', '95号', NULL, NULL, NULL, NULL, '2018-12-29 16:57:05', '2018-12-29 16:57:05');
+INSERT INTO `car_engine` VALUES (4, 6, 'EA888', 1984, '2', '11', NULL, NULL, NULL, NULL, NULL, NULL, '11', '11', NULL, NULL, NULL, NULL, '2018-12-29 17:11:13', '2018-12-29 17:11:13');
 
 -- ----------------------------
 -- Table structure for dict
@@ -193,7 +206,7 @@ CREATE TABLE `file_info`  (
   `c_id` int(11) NULL DEFAULT NULL,
   `c_type` int(2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of file_info
@@ -209,14 +222,29 @@ INSERT INTO `file_info` VALUES (11, 'a4260131a1345c95792198a925fb8fa3', 'image/j
 INSERT INTO `file_info` VALUES (12, '8bc7841dcf2dba6a9c391810b7e814f0', 'image/jpeg', 349451, 'd:/files/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', '/2018/12/02/8bc7841dcf2dba6a9c391810b7e814f0.jpg', 1, '2018-12-02 13:59:39', '2018-12-02 13:59:39', NULL, NULL);
 INSERT INTO `file_info` VALUES (23, 'ee7b2107eccd2512946374d75b7cea9c', 'image/jpeg', 7424, 'd:/files/2018/12/04/ee7b2107eccd2512946374d75b7cea9c.jpg', '/2018/12/04/ee7b2107eccd2512946374d75b7cea9c.jpg', 1, '2018-12-04 22:17:44', '2018-12-04 22:17:44', 1, 1);
 INSERT INTO `file_info` VALUES (24, '4ca1514c8b1715379db683c3c088d70e', 'image/jpeg', 8618, 'F:/files/2018/12/13/4ca1514c8b1715379db683c3c088d70e.jpg', '/2018/12/13/4ca1514c8b1715379db683c3c088d70e.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
-INSERT INTO `file_info` VALUES (25, '21b0090debb61bbb531cbede972874c4', 'image/jpeg', 6685, 'F:/files/2018/12/13/21b0090debb61bbb531cbede972874c4.jpg', '/2018/12/13/21b0090debb61bbb531cbede972874c4.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
-INSERT INTO `file_info` VALUES (26, '96c6de259136933eeaa3d7e1c57579f8', 'image/jpeg', 5673, 'F:/files/2018/12/13/96c6de259136933eeaa3d7e1c57579f8.jpg', '/2018/12/13/96c6de259136933eeaa3d7e1c57579f8.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
+INSERT INTO `file_info` VALUES (25, '21b0090debb61bbb531cbede972874c4', 'image/jpeg', 6685, 'F:/files/2018/12/13/21b0090debb61bbb531cbede972874c4.jpg', '/2018/12/13/21b0090debb61bbb531cbede972874c4.jpg', 1, '2018-12-13 10:35:15', '2018-12-29 17:11:33', 6, 1);
+INSERT INTO `file_info` VALUES (26, '96c6de259136933eeaa3d7e1c57579f8', 'image/jpeg', 5673, 'F:/files/2018/12/13/96c6de259136933eeaa3d7e1c57579f8.jpg', '/2018/12/13/96c6de259136933eeaa3d7e1c57579f8.jpg', 1, '2018-12-13 10:35:15', '2018-12-29 17:11:33', 6, 1);
 INSERT INTO `file_info` VALUES (27, '3b1dcd8d57a3c44c7af258390e3fb778', 'image/jpeg', 7820, 'F:/files/2018/12/13/3b1dcd8d57a3c44c7af258390e3fb778.jpg', '/2018/12/13/3b1dcd8d57a3c44c7af258390e3fb778.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
-INSERT INTO `file_info` VALUES (28, '601e103a5c0fefd00c3c6f16e9c48f0a', 'image/jpeg', 9052, 'F:/files/2018/12/13/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', '/2018/12/13/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
-INSERT INTO `file_info` VALUES (29, '5b527c798794805c2d082bdee0fad684', 'image/jpeg', 6440, 'F:/files/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', '/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
-INSERT INTO `file_info` VALUES (30, 'fef57a547d2fbd385b25fc153788acd1', 'image/jpeg', 4412, 'F:/files/2018/12/13/fef57a547d2fbd385b25fc153788acd1.jpg', '/2018/12/13/fef57a547d2fbd385b25fc153788acd1.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
+INSERT INTO `file_info` VALUES (28, '601e103a5c0fefd00c3c6f16e9c48f0a', 'image/jpeg', 9052, 'F:/files/2018/12/13/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', '/2018/12/13/601e103a5c0fefd00c3c6f16e9c48f0a.jpg', 1, '2018-12-13 10:35:15', '2018-12-29 17:11:33', 6, 1);
+INSERT INTO `file_info` VALUES (29, '5b527c798794805c2d082bdee0fad684', 'image/jpeg', 6440, 'F:/files/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', '/2018/12/13/5b527c798794805c2d082bdee0fad684.jpg', 1, '2018-12-13 10:35:15', '2018-12-29 17:14:45', 6, 1);
+INSERT INTO `file_info` VALUES (30, 'fef57a547d2fbd385b25fc153788acd1', 'image/jpeg', 4412, 'F:/files/2018/12/13/fef57a547d2fbd385b25fc153788acd1.jpg', '/2018/12/13/fef57a547d2fbd385b25fc153788acd1.jpg', 1, '2018-12-13 10:35:15', '2018-12-29 17:10:03', 1, 1);
 INSERT INTO `file_info` VALUES (31, 'eb3d561ec8b67374681e0b183744ef8d', 'image/jpeg', 5235, 'F:/files/2018/12/13/eb3d561ec8b67374681e0b183744ef8d.jpg', '/2018/12/13/eb3d561ec8b67374681e0b183744ef8d.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
 INSERT INTO `file_info` VALUES (32, '4462650163904d9a0946ebd490b60e0f', 'image/jpeg', 7820, 'F:/files/2018/12/13/4462650163904d9a0946ebd490b60e0f.jpg', '/2018/12/13/4462650163904d9a0946ebd490b60e0f.jpg', 1, '2018-12-13 10:35:15', '2018-12-13 10:35:15', 1, 1);
+INSERT INTO `file_info` VALUES (33, '39d766c18c08f604b71483627c6a7eaa', 'image/jpeg', 5257, 'F:/files/2018/12/29/39d766c18c08f604b71483627c6a7eaa.jpg', '/2018/12/29/39d766c18c08f604b71483627c6a7eaa.jpg', 1, '2018-12-29 16:41:22', '2018-12-29 16:41:22', NULL, NULL);
+INSERT INTO `file_info` VALUES (34, 'dfe59192ef6954408bc1fa6b39b35147', 'image/jpeg', 6904, 'F:/files/2018/12/29/dfe59192ef6954408bc1fa6b39b35147.jpg', '/2018/12/29/dfe59192ef6954408bc1fa6b39b35147.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 17:15:00', 2, 1);
+INSERT INTO `file_info` VALUES (35, 'a21e17efae19426f3cc0f29a83572892', 'image/jpeg', 6430, 'F:/files/2018/12/29/a21e17efae19426f3cc0f29a83572892.jpg', '/2018/12/29/a21e17efae19426f3cc0f29a83572892.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 17:17:48', 2, 1);
+INSERT INTO `file_info` VALUES (36, '859ce8847e3efa5ff14b6f8f2cafe6e1', 'image/jpeg', 7751, 'F:/files/2018/12/29/859ce8847e3efa5ff14b6f8f2cafe6e1.jpg', '/2018/12/29/859ce8847e3efa5ff14b6f8f2cafe6e1.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 16:43:32', 2, 1);
+INSERT INTO `file_info` VALUES (37, '5e7e5a81ed72e1cabc94a79d943d4926', 'image/jpeg', 7951, 'F:/files/2018/12/29/5e7e5a81ed72e1cabc94a79d943d4926.jpg', '/2018/12/29/5e7e5a81ed72e1cabc94a79d943d4926.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 16:43:32', 2, 1);
+INSERT INTO `file_info` VALUES (38, 'f1b058cd98bfeb4fa9c6564691fd8dde', 'image/jpeg', 7357, 'F:/files/2018/12/29/f1b058cd98bfeb4fa9c6564691fd8dde.jpg', '/2018/12/29/f1b058cd98bfeb4fa9c6564691fd8dde.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 17:20:15', 2, 1);
+INSERT INTO `file_info` VALUES (39, '02930a273c149e70d41758dfafb1dc55', 'image/jpeg', 8747, 'F:/files/2018/12/29/02930a273c149e70d41758dfafb1dc55.jpg', '/2018/12/29/02930a273c149e70d41758dfafb1dc55.jpg', 1, '2018-12-29 16:43:32', '2018-12-29 16:43:32', 2, 1);
+INSERT INTO `file_info` VALUES (40, '62cecadda8df1f95a13a38e28db9b1e7', 'image/jpeg', 6813, 'F:/files/2018/12/29/62cecadda8df1f95a13a38e28db9b1e7.jpg', '/2018/12/29/62cecadda8df1f95a13a38e28db9b1e7.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (41, 'be7f6ba0e6cbcce5e71027907b1230a6', 'image/jpeg', 6693, 'F:/files/2018/12/29/be7f6ba0e6cbcce5e71027907b1230a6.jpg', '/2018/12/29/be7f6ba0e6cbcce5e71027907b1230a6.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (42, 'ea95ecb11a360bd318b68ab36d8d5f22', 'image/jpeg', 5291, 'F:/files/2018/12/29/ea95ecb11a360bd318b68ab36d8d5f22.jpg', '/2018/12/29/ea95ecb11a360bd318b68ab36d8d5f22.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (43, '1a901caee4a061ec702614523390973e', 'image/jpeg', 6979, 'F:/files/2018/12/29/1a901caee4a061ec702614523390973e.jpg', '/2018/12/29/1a901caee4a061ec702614523390973e.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (44, '86c9cb0739452ee1c36eb550afa4be2b', 'image/jpeg', 8146, 'F:/files/2018/12/29/86c9cb0739452ee1c36eb550afa4be2b.jpg', '/2018/12/29/86c9cb0739452ee1c36eb550afa4be2b.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (45, 'ec91687654403eaa2c0fb0592cfdfce0', 'image/jpeg', 8598, 'F:/files/2018/12/29/ec91687654403eaa2c0fb0592cfdfce0.jpg', '/2018/12/29/ec91687654403eaa2c0fb0592cfdfce0.jpg', 1, '2018-12-29 17:03:12', '2018-12-29 17:03:12', 3, 1);
+INSERT INTO `file_info` VALUES (46, '9453cd79a868618eb6361abe6ad95aff', 'image/jpeg', 8254, 'F:/files/2018/12/29/9453cd79a868618eb6361abe6ad95aff.jpg', '/2018/12/29/9453cd79a868618eb6361abe6ad95aff.jpg', 1, '2018-12-29 17:04:08', '2018-12-29 17:04:08', NULL, NULL);
+INSERT INTO `file_info` VALUES (47, '384ab1b10298b083ada9d783aa42cab5', 'image/jpeg', 7549, 'F:/files/2018/12/29/384ab1b10298b083ada9d783aa42cab5.jpg', '/2018/12/29/384ab1b10298b083ada9d783aa42cab5.jpg', 1, '2018-12-29 17:06:34', '2018-12-29 17:06:34', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for ims_autoparts_car_brand
@@ -3825,7 +3853,7 @@ CREATE TABLE `sys_logs`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE,
   INDEX `user_id`(`user`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 736 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 822 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logs
@@ -4394,6 +4422,92 @@ INSERT INTO `sys_logs` VALUES (732, 1, '校验当前用户的权限', 1, NULL, '
 INSERT INTO `sys_logs` VALUES (733, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 14:04:21');
 INSERT INTO `sys_logs` VALUES (734, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 14:07:01');
 INSERT INTO `sys_logs` VALUES (735, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 14:07:03');
+INSERT INTO `sys_logs` VALUES (736, 1, 'web端登陆', 1, NULL, '2018-12-29 16:33:04');
+INSERT INTO `sys_logs` VALUES (737, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 16:33:04');
+INSERT INTO `sys_logs` VALUES (738, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:33:06');
+INSERT INTO `sys_logs` VALUES (739, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:33:46');
+INSERT INTO `sys_logs` VALUES (740, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:33:54');
+INSERT INTO `sys_logs` VALUES (741, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:34:19');
+INSERT INTO `sys_logs` VALUES (742, 1, 'web端登陆', 1, NULL, '2018-12-29 16:37:49');
+INSERT INTO `sys_logs` VALUES (743, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 16:37:49');
+INSERT INTO `sys_logs` VALUES (744, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:37:51');
+INSERT INTO `sys_logs` VALUES (745, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:38:22');
+INSERT INTO `sys_logs` VALUES (746, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:39:09');
+INSERT INTO `sys_logs` VALUES (747, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:39:29');
+INSERT INTO `sys_logs` VALUES (748, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 16:39:33');
+INSERT INTO `sys_logs` VALUES (749, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:39:34');
+INSERT INTO `sys_logs` VALUES (750, 1, '文件上传', 1, NULL, '2018-12-29 16:41:22');
+INSERT INTO `sys_logs` VALUES (751, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:43:22');
+INSERT INTO `sys_logs` VALUES (752, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (753, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (754, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (755, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (756, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (757, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (758, 1, '图片上传', 1, NULL, '2018-12-29 16:43:32');
+INSERT INTO `sys_logs` VALUES (759, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:47:04');
+INSERT INTO `sys_logs` VALUES (760, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:47:07');
+INSERT INTO `sys_logs` VALUES (761, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:47:16');
+INSERT INTO `sys_logs` VALUES (762, 1, 'web端登陆', 1, NULL, '2018-12-29 16:50:31');
+INSERT INTO `sys_logs` VALUES (763, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 16:50:31');
+INSERT INTO `sys_logs` VALUES (764, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:50:32');
+INSERT INTO `sys_logs` VALUES (765, 1, 'web端登陆', 1, NULL, '2018-12-29 16:55:25');
+INSERT INTO `sys_logs` VALUES (766, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 16:55:25');
+INSERT INTO `sys_logs` VALUES (767, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 16:55:30');
+INSERT INTO `sys_logs` VALUES (768, 1, '文件上传', 1, NULL, '2018-12-29 16:56:20');
+INSERT INTO `sys_logs` VALUES (769, 1, 'web端登陆', 1, NULL, '2018-12-29 17:02:56');
+INSERT INTO `sys_logs` VALUES (770, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:02:56');
+INSERT INTO `sys_logs` VALUES (771, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:02:58');
+INSERT INTO `sys_logs` VALUES (772, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (773, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (774, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (775, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (776, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (777, 1, '图片上传', 1, NULL, '2018-12-29 17:03:11');
+INSERT INTO `sys_logs` VALUES (778, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:03:13');
+INSERT INTO `sys_logs` VALUES (779, 1, '文件上传', 1, NULL, '2018-12-29 17:04:08');
+INSERT INTO `sys_logs` VALUES (780, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:06:27');
+INSERT INTO `sys_logs` VALUES (781, 1, '文件上传', 1, NULL, '2018-12-29 17:06:34');
+INSERT INTO `sys_logs` VALUES (782, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:06:44');
+INSERT INTO `sys_logs` VALUES (783, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:07:08');
+INSERT INTO `sys_logs` VALUES (784, 1, '文件上传', 1, NULL, '2018-12-29 17:07:48');
+INSERT INTO `sys_logs` VALUES (785, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:08:00');
+INSERT INTO `sys_logs` VALUES (786, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:08:04');
+INSERT INTO `sys_logs` VALUES (787, 1, 'web端登陆', 1, NULL, '2018-12-29 17:09:54');
+INSERT INTO `sys_logs` VALUES (788, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:09:54');
+INSERT INTO `sys_logs` VALUES (789, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:09:56');
+INSERT INTO `sys_logs` VALUES (790, 1, '文件上传', 1, NULL, '2018-12-29 17:10:03');
+INSERT INTO `sys_logs` VALUES (791, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:10:06');
+INSERT INTO `sys_logs` VALUES (792, 1, '文件上传', 1, NULL, '2018-12-29 17:10:43');
+INSERT INTO `sys_logs` VALUES (793, 1, '图片上传', 1, NULL, '2018-12-29 17:11:28');
+INSERT INTO `sys_logs` VALUES (794, 1, '图片上传', 1, NULL, '2018-12-29 17:11:33');
+INSERT INTO `sys_logs` VALUES (795, 1, '图片上传', 1, NULL, '2018-12-29 17:11:33');
+INSERT INTO `sys_logs` VALUES (796, 1, '图片上传', 1, NULL, '2018-12-29 17:11:33');
+INSERT INTO `sys_logs` VALUES (797, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:11:38');
+INSERT INTO `sys_logs` VALUES (798, 1, '文件上传', 1, NULL, '2018-12-29 17:11:58');
+INSERT INTO `sys_logs` VALUES (799, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:12:00');
+INSERT INTO `sys_logs` VALUES (800, 1, '文件上传', 1, NULL, '2018-12-29 17:14:44');
+INSERT INTO `sys_logs` VALUES (801, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:14:53');
+INSERT INTO `sys_logs` VALUES (802, 1, '文件上传', 1, NULL, '2018-12-29 17:15:00');
+INSERT INTO `sys_logs` VALUES (803, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:15:05');
+INSERT INTO `sys_logs` VALUES (804, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:17:34');
+INSERT INTO `sys_logs` VALUES (805, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:17:35');
+INSERT INTO `sys_logs` VALUES (806, 1, '文件上传', 1, NULL, '2018-12-29 17:17:47');
+INSERT INTO `sys_logs` VALUES (807, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:18:23');
+INSERT INTO `sys_logs` VALUES (808, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:18:24');
+INSERT INTO `sys_logs` VALUES (809, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:19:39');
+INSERT INTO `sys_logs` VALUES (810, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:19:41');
+INSERT INTO `sys_logs` VALUES (811, 1, '文件上传', 1, NULL, '2018-12-29 17:19:46');
+INSERT INTO `sys_logs` VALUES (812, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:19:56');
+INSERT INTO `sys_logs` VALUES (813, 1, '文件上传', 1, NULL, '2018-12-29 17:20:01');
+INSERT INTO `sys_logs` VALUES (814, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:20:02');
+INSERT INTO `sys_logs` VALUES (815, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:20:09');
+INSERT INTO `sys_logs` VALUES (816, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:20:10');
+INSERT INTO `sys_logs` VALUES (817, 1, '文件上传', 1, NULL, '2018-12-29 17:20:14');
+INSERT INTO `sys_logs` VALUES (818, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:20:15');
+INSERT INTO `sys_logs` VALUES (819, 1, 'web端登陆', 1, NULL, '2018-12-29 17:31:38');
+INSERT INTO `sys_logs` VALUES (820, 1, '当前登录用户拥有的权限', 1, NULL, '2018-12-29 17:31:38');
+INSERT INTO `sys_logs` VALUES (821, 1, '校验当前用户的权限', 1, NULL, '2018-12-29 17:31:40');
 
 -- ----------------------------
 -- Table structure for sys_permission
