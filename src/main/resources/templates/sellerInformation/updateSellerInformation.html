@@ -16,6 +16,12 @@
 				</div>
 			</div>
 			<div class='form-group'>
+				<label class='col-md-2 control-label'>联系方式</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='联系方式' type='text' name='phone' id='phone'>
+				</div>
+			</div>
+			<div class='form-group'>
 				<label class='col-md-2 control-label'>地址</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='地址' type='text' name='address' id='address' data-bv-notempty='true' data-bv-notempty-message='address 不能为空'>
@@ -68,6 +74,7 @@
 					success : function(data) {
 						$('#id').val(data.id);
 						$('#name').val(data.name);
+                        $('#phone').val(data.phone);
 						$('#address').val(data.address);
 						$('#introduceStr').val(data.introduceStr);
 					}
@@ -76,7 +83,21 @@
 		}
 
 		function update() {
-			$('#form').bootstrapValidator();
+			$('#form').bootstrapValidator({
+                fields:{
+                    phone:{
+                        validators:{
+                            notEmpty: {
+                                message: '联系方式 不能为空'
+                            },
+                            regexp: {
+                                regexp: "(^(\\d{3,4}-)?\\d{7,8})$|(1[3|5|7|8]\\d{9})",
+                                message: '联系方式 格式不正确'
+                            }
+                        }
+                    }
+                }
+            });
 			var bootstrapValidator = $("#form").data('bootstrapValidator');
 			bootstrapValidator.validate();
 		    if(!bootstrapValidator.isValid()){

@@ -15,7 +15,7 @@
         <!--阿里云仓库-->
         <repository>
             <id>aliyun</id>
-            <url>http://maven.aliyun.com/mvn/view</url>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 

@@ -16,6 +16,8 @@ public class SellerInformation extends BaseTransientEntity {
 
     private String address;
 
+    private String phone;
+
     private byte[] introduce;
 
     @Transient
@@ -68,6 +70,14 @@ public class SellerInformation extends BaseTransientEntity {
      */
     public byte[] getIntroduce() {
         return introduce;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     /**

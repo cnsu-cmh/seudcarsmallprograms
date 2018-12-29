@@ -20,10 +20,10 @@
 
     <sql id="where">
         <where>
-            <if test="params.brand != null and params.brand != ''">
+            <if test="params.brand != null and params.brand != '' and params.brand != '不限品牌'">
                 and t.brand = #{params.brand}
             </if>
-            <if test="params.type != null and params.type != ''">
+            <if test="params.type != null and params.type != '' and params.type != '不限' ">
                 and t.type = #{params.type}
             </if>
             <if test="params.level != null and params.level != '' and params.level != '不限' ">
