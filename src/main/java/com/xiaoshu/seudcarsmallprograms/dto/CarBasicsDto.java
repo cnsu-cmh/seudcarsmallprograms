@@ -72,4 +72,13 @@ public class CarBasicsDto implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
+    public CarBasicsDto() {
+    }
+
+    public CarBasicsDto(String level, BigDecimal minPrice, BigDecimal maxPrice) {
+        this.level = level;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+    }
 }

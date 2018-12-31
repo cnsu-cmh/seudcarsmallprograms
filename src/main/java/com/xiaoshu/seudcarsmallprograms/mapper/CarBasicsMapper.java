@@ -19,4 +19,6 @@ public interface CarBasicsMapper extends MyMapper<CarBasics> {
     void under(@Param("id")Long id);
 
     List<CarBasicsVo> selectListCondition(@Param("params")CarBasicsDto carBasicsDto);
+
+    List<CarBasicsVo> selectAnyListCondition(@Param("params")CarBasicsDto carBasicsDto);
 }

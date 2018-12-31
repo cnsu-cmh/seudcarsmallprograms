@@ -39,4 +39,8 @@ public interface CarBasicsService {
     void importCarBasics(MultipartFile file) throws Exception;
 
     List<CarBasicsVo> selectListCondition(CarBasicsDto carBasicsDto);
+
+    List<CarBasicsVo> selectAnyListCondition(CarBasicsDto carBasicsDto);
+
+    Number countOnline();
 }

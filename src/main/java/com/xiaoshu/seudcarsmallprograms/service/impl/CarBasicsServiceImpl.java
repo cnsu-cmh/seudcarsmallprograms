@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 public class CarBasicsServiceImpl implements CarBasicsService {
@@ -125,5 +126,17 @@ public class CarBasicsServiceImpl implements CarBasicsService {
     @Override
     public List<CarBasicsVo> selectListCondition(CarBasicsDto carBasicsDto) {
         return carBasicsMapper.selectListCondition(carBasicsDto);
+    }
+
+    @Override
+    public List<CarBasicsVo> selectAnyListCondition(CarBasicsDto carBasicsDto) {
+        return carBasicsMapper.selectAnyListCondition(carBasicsDto);
+    }
+
+    @Override
+    public Number countOnline() {
+        Example example = new Example(CarBasics.class);
+        example.createCriteria().andNotEqualTo("status",-1);
+        return carBasicsMapper.selectCountByExample(example);
     }
 }

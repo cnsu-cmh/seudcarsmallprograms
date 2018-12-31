@@ -39,6 +39,20 @@
         </where>
     </sql>
 
+    <sql id="whereOr">
+        <where>
+            t.status = 1
+            <if test="params.level != null and params.level != '' and params.level != '不限' ">
+                and ( t.level like #{params.level}
+                <if test="params.minPrice != null and params.minPrice != '' and params.maxPrice != null and params.maxPrice != ''">
+                    or (t.selling_price >= #{params.minPrice} and t.selling_price &lt;= #{params.maxPrice})
+                </if>
+                )
+            </if>
+
+        </where>
+    </sql>
+
     <sql id="sorted">
         <choose>
             <when test="params.sort != null and params.sort != '' and params.sort == '价格最低' ">
@@ -65,5 +79,14 @@
         <include refid="where" />
         <include refid="sorted" />
     </select>
+
+    <select id="selectAnyListCondition" resultMap="ApiResultMap">
+        select t.id,t.brand,t.type,t.name,t.level,t.engine,t.car_structure,t.guarantee,t.playing_cards,t.selling_price,t.wel_pic
+        from car_basics t
+        <include refid="whereOr" />
+        <include refid="sorted" />
+    </select>
+
+
 
 </mapper>

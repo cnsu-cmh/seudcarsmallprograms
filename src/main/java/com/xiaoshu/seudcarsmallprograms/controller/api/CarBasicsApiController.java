@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Api(tags = "车信息接口")
@@ -51,8 +52,14 @@ public class CarBasicsApiController extends ApiController {
         SellerInformation seller = carBasicsService.selectSellerInfoByCarId(carBasics.getSellerId());
         List<FileInfo> files = fileService.getByCIdAndCType(id, FileInfo.CType.car);
         files.forEach(f -> f.setPath(Base64Img.getBase64ImageStr(filesPath , f.getUrl())));
+        CarBasicsDto carBasicsDto = new CarBasicsDto("%"+carBasics.getLevel()+"%", carBasics.getSellingPrice().subtract(new BigDecimal(5.5)), carBasics.getSellingPrice().add(new BigDecimal(5.5)));
+        List<CarBasicsVo> carBasicsVos = carBasicsService.selectAnyListCondition(carBasicsDto);
+        carBasicsVos.forEach(car -> car.setWelPic(Base64Img.getBase64ImageStr(filesPath , car.getWelPic())));
+        Number count = carBasicsService.countOnline();
         ResponseEntity responseEntity = ResponseEntity.success();
         responseEntity.setAny("data",carBasics);
+        responseEntity.setAny("similars",carBasicsVos);
+        responseEntity.setAny("count",count.intValue());
         responseEntity.setAny("seller",seller == null ? new SellerInformation() : seller);
         responseEntity.setAny("files",files);
         return responseEntity;
